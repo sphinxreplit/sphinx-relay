@@ -65,6 +65,28 @@ CREATE TABLE sphinx_timers (
         addTableColumn('sphinx_messages', 'uuid');
         addTableColumn('sphinx_messages', 'reply_uuid');
         addTableColumn('sphinx_media_keys', 'sender', 'BIGINT');
+        addTableColumn('sphinx_chats', 'group_key');
+        addTableColumn('sphinx_chats', 'group_private_key');
+        addTableColumn('sphinx_chats', 'host');
+        addTableColumn('sphinx_chats', 'price_to_join', 'BIGINT');
+        addTableColumn('sphinx_chats', 'price_per_message', 'BIGINT');
+        addTableColumn('sphinx_chats', 'owner_pubkey');
+        addTableColumn('sphinx_messages', 'sender_alias');
+        addTableColumn('sphinx_contacts', 'from_group');
+        try {
+            yield models_1.sequelize.query(`
+CREATE TABLE sphinx_chat_members (
+  chat_id INT,
+  contact_id INT,
+  alias TEXT,
+  role INT,
+  total_spent INT,
+  total_messages INT,
+  last_active DATETIME,
+  alias TEXT
+)`);
+        }
+        catch (e) { }
     });
 }
 function addTableColumn(table, column, type = 'TEXT') {
