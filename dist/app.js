@@ -87,20 +87,21 @@ function setupApp() {
         app.use('/static', express.static('public'));
         app.get('/app', (req, res) => res.sendFile(__dirname + '/public/index.html'));
         controllers.set(app);
-        function start() {
-            return __awaiter(this, void 0, void 0, function* () {
-                yield scout.install();
-                const server = require("http").Server(app);
-                server.listen(port, (err) => {
-                    if (err)
-                        throw err;
-                    /* eslint-disable no-console */
-                    console.log(`Node listening on ${port}.`);
-                });
-                socket.connect(server);
-            });
+        try {
+            yield scout.install();
         }
-        start();
+        catch (e) {
+            console.log(e);
+        }
+        console.log('=> [scout] set up');
+        const server = require("http").Server(app);
+        server.listen(port, (err) => {
+            if (err)
+                throw err;
+            /* eslint-disable no-console */
+            console.log(`Node listening on ${port}.`);
+        });
+        socket.connect(server);
     });
 }
 function authModule(req, res, next) {

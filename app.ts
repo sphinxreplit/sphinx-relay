@@ -81,18 +81,20 @@ async function setupApp(){
 
 	controllers.set(app);
 
-	async function start(){
+	try {
 		await scout.install();
-
-		const server = require("http").Server(app);
-		server.listen(port, (err) => {
-			if (err) throw err;
-			/* eslint-disable no-console */
-			console.log(`Node listening on ${port}.`);
-		});
-		socket.connect(server)
+	} catch(e){
+		console.log(e)
 	}
-	start()
+	console.log('=> [scout] set up')
+
+	const server = require("http").Server(app);
+	server.listen(port, (err) => {
+		if (err) throw err;
+		/* eslint-disable no-console */
+		console.log(`Node listening on ${port}.`);
+	});
+	socket.connect(server)
 }
 
 async function authModule(req, res, next) {
