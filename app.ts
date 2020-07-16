@@ -48,19 +48,12 @@ async function mainSetup(){
 		pingHubInterval(5000)
 		checkInvitesHubInterval(5000)
 	}
-	await downloadScout()
 	await setupApp()
 	setupDone()
 }
 
-async function downloadScout() {
-	// Trigger the download and installation of the core-agent
-	scout.install();
-}
-
 async function setupApp(){
 	const app = express();
-	const server = require("http").Server(app);
 
 	// Enable the app-wide scout middleware
 	app.use(scout.expressMiddleware());
@@ -86,15 +79,20 @@ async function setupApp(){
 	app.use('/static', express.static('public'));
 	app.get('/app', (req, res) => res.sendFile(__dirname + '/public/index.html'))
 
-	server.listen(port, (err) => {
-		if (err) throw err;
-		/* eslint-disable no-console */
-		console.log(`Node listening on ${port}.`);
-	});
-
 	controllers.set(app);
 
-	socket.connect(server)
+	async function start(){
+		await scout.install();
+
+		const server = require("http").Server(app);
+		server.listen(port, (err) => {
+			if (err) throw err;
+			/* eslint-disable no-console */
+			console.log(`Node listening on ${port}.`);
+		});
+		socket.connect(server)
+	}
+	start()
 }
 
 async function authModule(req, res, next) {

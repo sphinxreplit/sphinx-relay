@@ -57,21 +57,13 @@ function mainSetup() {
             hub_1.pingHubInterval(5000);
             hub_1.checkInvitesHubInterval(5000);
         }
-        yield downloadScout();
         yield setupApp();
         setup_1.setupDone();
-    });
-}
-function downloadScout() {
-    return __awaiter(this, void 0, void 0, function* () {
-        // Trigger the download and installation of the core-agent
-        scout.install();
     });
 }
 function setupApp() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = express();
-        const server = require("http").Server(app);
         // Enable the app-wide scout middleware
         app.use(scout.expressMiddleware());
         app.use(helmet());
@@ -94,14 +86,21 @@ function setupApp() {
         }
         app.use('/static', express.static('public'));
         app.get('/app', (req, res) => res.sendFile(__dirname + '/public/index.html'));
-        server.listen(port, (err) => {
-            if (err)
-                throw err;
-            /* eslint-disable no-console */
-            console.log(`Node listening on ${port}.`);
-        });
         controllers.set(app);
-        socket.connect(server);
+        function start() {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield scout.install();
+                const server = require("http").Server(app);
+                server.listen(port, (err) => {
+                    if (err)
+                        throw err;
+                    /* eslint-disable no-console */
+                    console.log(`Node listening on ${port}.`);
+                });
+                socket.connect(server);
+            });
+        }
+        start();
     });
 }
 function authModule(req, res, next) {
