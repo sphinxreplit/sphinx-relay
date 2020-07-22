@@ -265,9 +265,17 @@ function debounce(func, id, delay) {
     if (!tribeCounts[id])
         tribeCounts[id] = 0;
     tribeCounts[id] += 1;
+    const start = process.hrtime();
     bounceTimeouts[id] = setTimeout(() => {
         func.apply(context, args);
-        setTimeout(() => tribeCounts[id] = 0, 15);
+        const nStart = process.hrtime();
+        setTimeout(() => function () {
+            tribeCounts[id] = 0;
+            const end = process.hrtime(nStart);
+            console.log(`debounce-in callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
+        }, 15);
+        const end = process.hrtime(start);
+        console.log(`debounce callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
     }, delay);
 }
 //# sourceMappingURL=hub.js.map

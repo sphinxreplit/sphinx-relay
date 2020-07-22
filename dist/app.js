@@ -43,8 +43,11 @@ function connectToLND() {
             if (e.details) {
                 console.log(`=> [lnd] error details: ${e.details}`);
             }
+            const start = process.hrtime();
             setTimeout(() => __awaiter(this, void 0, void 0, function* () {
                 yield connectToLND();
+                const end = process.hrtime(start);
+                console.log(`connectToLND callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
             }), 2000);
         }
     });

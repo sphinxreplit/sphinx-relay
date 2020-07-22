@@ -63,7 +63,12 @@ function setTimer(name, when, cb) {
         cb(); // fire right away if its already passed
     }
     else {
-        timerz[name] = setTimeout(cb, ms);
+        const start = process.hrtime();
+        timerz[name] = setTimeout(function () {
+            cb();
+            const end = process.hrtime(start);
+            console.log(`connectToLND callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
+        }, ms);
     }
 }
 exports.setTimer = setTimer;
@@ -78,8 +83,11 @@ function reloadTimers() {
         timers && timers.forEach((t, i) => {
             const name = makeName(t);
             setTimer(name, t.millis, () => __awaiter(this, void 0, void 0, function* () {
+                const start = process.hrtime();
                 setTimeout(() => {
                     payBack(t);
+                    const end = process.hrtime(start);
+                    console.log(`reloadTimers callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
                 }, i * 999); // dont do all at once
             }));
         });

@@ -41,7 +41,12 @@ export function setTimer(name:string, when:number, cb){
 	if(ms<0) {
         cb() // fire right away if its already passed
     } else {
-        timerz[name] = setTimeout(cb, ms)
+        const start = process.hrtime();
+        timerz[name] = setTimeout(function() {
+            cb()
+            const end = process.hrtime(start);
+            console.log(`connectToLND callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
+        }, ms)
     }
 }
 function makeName(t){
@@ -54,8 +59,11 @@ export async function reloadTimers(){
 	timers && timers.forEach((t,i)=>{
         const name = makeName(t)
 		setTimer(name, t.millis, async ()=>{
+            const start = process.hrtime();
             setTimeout(()=>{
                 payBack(t)
+                const end = process.hrtime(start);
+                console.log(`reloadTimers callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
             },i*999) // dont do all at once
 		})
 	})

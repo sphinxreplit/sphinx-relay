@@ -165,7 +165,12 @@ async function asyncForEach(array, callback) {
 	}
 }
 async function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms))
+	const start = process.hrtime();
+	return new Promise(resolve => setTimeout(function() {
+		resolve()
+		const end = process.hrtime(start);
+		console.log(`sleep send callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
+  }, ms))
 }
 
 // function urlBase64FromHex(ascii){

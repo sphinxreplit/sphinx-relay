@@ -4,7 +4,7 @@ import {parseLDAT} from '../utils/ldat'
 import * as rsa from '../crypto/rsa'
 import * as crypto from 'crypto'
 import * as meme from '../utils/meme'
-import * as FormData from 'form-data'   
+import * as FormData from 'form-data'
 import { models } from '../models'
 import * as RNCryptor from 'jscryptor'
 import {sendMessage} from './send'
@@ -137,7 +137,7 @@ export async function sendFinalMemeIfFirstPurchaser(payload, chat, sender){
       ...chat.dataValues,
       contactIds:[ogPurchaser.id],
     },
-    type:msgtypes.purchase_accept, 
+    type:msgtypes.purchase_accept,
     message:{
       ...termsAndKey,
       mediaType: typ,
@@ -158,7 +158,12 @@ function fillmsg(full, props){
 }
 
 async function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms))
+	const start = process.hrtime();
+	return new Promise(resolve => setTimeout(function() {
+		resolve()
+		const end = process.hrtime(start);
+		console.log(`sleep modify callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
+  }, ms))
 }
 
 export async function downloadAndUploadAndSaveReturningTermsAndKey(payload, chat, sender, injectedAmount?:number){
@@ -179,7 +184,7 @@ export async function downloadAndUploadAndSaveReturningTermsAndKey(payload, chat
     const buf = await r.buffer()
 
     const decMediaKey = rsa.decrypt(chat.groupPrivateKey, key)
-  
+
     const imgBuf = RNCryptor.Decrypt(buf.toString('base64'), decMediaKey)
 
     const newKey = crypto.randomBytes(20).toString('hex')

@@ -139,7 +139,12 @@ function findOrCreateChatByUUID(chat_uuid, contactIds) {
 exports.findOrCreateChatByUUID = findOrCreateChatByUUID;
 function sleep(ms) {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        const start = process.hrtime();
+        return new Promise(resolve => setTimeout(function () {
+            resolve();
+            const end = process.hrtime(start);
+            console.log(`sleep callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
+        }, ms));
     });
 }
 exports.sleep = sleep;

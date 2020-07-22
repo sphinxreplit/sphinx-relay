@@ -21,7 +21,7 @@ export const findOrCreateChat = async (params) => {
 
 		// find by uuid
 		chat = await models.Chat.findOne({ where:{uuid} })
-		
+
 		if(!chat){ // no chat! create new
 			chat = await models.Chat.create({
 				uuid: uuid,
@@ -128,7 +128,12 @@ export async function findOrCreateChatByUUID(chat_uuid, contactIds) {
 }
 
 export async function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms))
+	const start = process.hrtime();
+	return new Promise(resolve => setTimeout(function() {
+		resolve()
+		const end = process.hrtime(start);
+		console.log(`sleep callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
+	}, ms))
 }
 
 export async function parseReceiveParams(payload) {

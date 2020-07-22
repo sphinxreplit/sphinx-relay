@@ -39,7 +39,12 @@ function connect(onMessage) {
                         updateTribeStats(info.identity_pubkey);
                     });
                     client.on('close', function (e) {
-                        setTimeout(() => reconnect(), 2000);
+                        const start = process.hrtime();
+                        setTimeout(() => function () {
+                            reconnect();
+                            const end = process.hrtime(start);
+                            console.log(`connect callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
+                        }, 2000);
                     });
                     client.on('error', function (e) {
                         console.log('[tribes] error: ', e.message || e);

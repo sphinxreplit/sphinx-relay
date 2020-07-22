@@ -43,7 +43,7 @@ const checkInviteHub = async (params = {}) => {
           if(invite.invoice) updateObj.invoice = invite.invoice
 
           dbInvite.update(updateObj)
-          
+
           socket.sendJson({
             type: 'invite',
             response: jsonUtils.inviteToJson(dbInvite)
@@ -59,7 +59,7 @@ const checkInviteHub = async (params = {}) => {
 
           var contactJson = jsonUtils.contactToJson(contact)
           contactJson.invite = jsonUtils.inviteToJson(dbInvite)
-          
+
           socket.sendJson({
             type: 'contact',
             response: contactJson
@@ -194,7 +194,7 @@ const createInviteInHub = (params, onSuccess, onFailure) => {
 }
 
 const sendNotification = async (chat, name, type) => {
-  
+
   let message = `You have a new message from ${name}`
   if(type==='invite'){
     message = `Your invite to ${name} is ready`
@@ -255,7 +255,7 @@ function triggerNotification(params){
   .then(res => res.json())
   .then(json => {
     // console.log('[hub notification]', json)
-  })  
+  })
 }
 
 export {
@@ -285,8 +285,16 @@ function debounce(func, id, delay) {
   if(bounceTimeouts[id]) clearTimeout(bounceTimeouts[id])
   if(!tribeCounts[id]) tribeCounts[id]=0
   tribeCounts[id]+=1
+  const start = process.hrtime();
   bounceTimeouts[id] = setTimeout(() => {
     func.apply(context, args)
-    setTimeout(()=> tribeCounts[id]=0, 15)
+    const nStart = process.hrtime();
+    setTimeout(()=> function() {
+      tribeCounts[id]=0
+      const end = process.hrtime(nStart);
+      console.log(`debounce-in callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
+    }, 15)
+    const end = process.hrtime(start);
+    console.log(`debounce callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
   }, delay)
 }

@@ -114,8 +114,11 @@ function subscribeInvoices(parseKeysendInvoice) {
             i = 0;
             reconnectToLND(Math.random());
         });
+        const start = process.hrtime();
         setTimeout(() => {
             resolve(null);
+            const end = process.hrtime(start);
+            console.log(`subscribeInvoice callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
         }, 100);
     }));
 }
@@ -133,10 +136,13 @@ function reconnectToLND(innerCtx) {
             console.log(`=> [lnd] reconnected! ${now}`);
         }
         catch (e) {
+            const start = process.hrtime();
             setTimeout(() => __awaiter(this, void 0, void 0, function* () {
                 if (ctx === innerCtx) { // if another retry fires, then this will not run
                     yield reconnectToLND(innerCtx);
                 }
+                const end = process.hrtime(start);
+                console.log(`reconnectToLND index.ts callback executed after ${end[0]}s and ${end[1] / Math.pow(10, 9)}ms`);
             }), 2000);
         }
     });

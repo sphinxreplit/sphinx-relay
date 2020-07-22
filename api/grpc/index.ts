@@ -12,7 +12,7 @@ const constants = require(path.join(__dirname,'../../config/constants.json'))
 const ERR_CODE_UNAVAILABLE = 14
 const ERR_CODE_STREAM_REMOVED = 2
 
-export function subscribeInvoices(parseKeysendInvoice) {	
+export function subscribeInvoices(parseKeysendInvoice) {
 	return new Promise(async(resolve,reject)=>{
 		const lightning = await loadLightning()
 
@@ -109,8 +109,11 @@ export function subscribeInvoices(parseKeysendInvoice) {
 			i = 0
 			reconnectToLND(Math.random())
 		})
+		const start = process.hrtime();
 		setTimeout(()=>{
 			resolve(null)
+			const end = process.hrtime(start);
+    	console.log(`subscribeInvoice callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
 		},100)
 	})
 }
@@ -126,10 +129,13 @@ async function reconnectToLND(innerCtx:number){
 		const now = moment().format('YYYY-MM-DD HH:mm:ss').trim();
 		console.log(`=> [lnd] reconnected! ${now}`)
 	} catch(e) {
+		const start = process.hrtime();
 		setTimeout(async()=>{ // retry each 2 secs
 			if(ctx===innerCtx) { // if another retry fires, then this will not run
 				await reconnectToLND(innerCtx)
 			}
+			const end = process.hrtime(start);
+    	console.log(`reconnectToLND index.ts callback executed after ${end[0]}s and ${end[1]/Math.pow(10,9)}ms`);
 		},2000)
 	}
 }
