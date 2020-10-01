@@ -229,6 +229,7 @@ const sendNotification = async (chat, name, type:NotificationType) => {
     if(isAndroid) return // skip on Android if no actual message
   }
   params.notification = notification
+  params.notification.data = {chat_id:chat.id}
 
   if(type==='message' && chat.type==constants.chat_types.tribe){
     debounce(()=>{

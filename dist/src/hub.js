@@ -223,6 +223,7 @@ const sendNotification = (chat, name, type) => __awaiter(void 0, void 0, void 0,
             return; // skip on Android if no actual message
     }
     params.notification = notification;
+    params.notification.data = { chat_id: chat.id };
     if (type === 'message' && chat.type == constants.chat_types.tribe) {
         debounce(() => {
             const count = tribeCounts[chat.id] ? tribeCounts[chat.id] + ' ' : '';
