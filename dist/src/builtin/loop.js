@@ -137,8 +137,10 @@ function doRequest(theurl, params) {
     return __awaiter(this, void 0, void 0, function* () {
         const ps = params || {};
         try {
+            console.log('config.macaroon_location', config.macaroon_location);
             var macaroonString = fs.readFileSync(config.macaroon_location);
             var mac = Buffer.from(macaroonString, 'utf8').toString('hex');
+            console.log('mac', mac);
             const theParams = Object.assign({ agent, headers: {
                     'Grpc-Metadata-macaroon': mac
                 } }, ps);
