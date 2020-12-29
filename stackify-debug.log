@@ -1,0 +1,190 @@
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) -------------------
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) Debugging started
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) Node version: 12.0.0
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) AppName: Sphinx
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) Transport: log
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) Transport HTTP Endpoint: https://localhost:10601
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) [Log] Identifying the app
+Tue Dec 29 2020 09:58:50 GMT-0800 (Pacific Standard Time) Request sent
+{
+    "url": "https://api.stackify.com/Metrics/IdentifyApp",
+    "method": "POST",
+    "json": true,
+    "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Stackify-Key": "1Zr4Tk1Pd2Qp2To5To5Lp5Yd9Hi6Om6Bw8Da2Vx",
+        "X-Stackify-PV": "V1"
+    },
+    "body": {
+        "DeviceName": "evan.local",
+        "AppName": "Sphinx",
+        "ConfiguredAppName": "Sphinx",
+        "AppLocation": "/Users/evanfeenstra/code/sphinx-relay",
+        "ConfiguredEnvironmentName": "Dev"
+    }
+}
+Tue Dec 29 2020 09:58:52 GMT-0800 (Pacific Standard Time) Response received
+url: https://api.stackify.com/Metrics/IdentifyApp:443, method: POST, status: 200
+response: {
+    "DeviceID": null,
+    "DeviceAppID": null,
+    "AppNameID": "b272db8e-fe49-eb11-a607-501ac5f9ed47",
+    "EnvID": 3,
+    "Env": "Dev",
+    "AppName": "Sphinx",
+    "AppEnvID": "b5f93dc5-c7a4-4892-b0b1-820335ae0446",
+    "DeviceAlias": "evan.local"
+}
+Tue Dec 29 2020 09:58:52 GMT-0800 (Pacific Standard Time) [Log] Successfully identified
+Tue Dec 29 2020 09:58:55 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:58:55 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:00 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:00 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:05 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:05 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:10 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:10 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:15 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:15 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:20 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:20 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:25 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:25 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:30 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:30 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:35 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:35 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:40 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:40 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:45 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:45 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:50 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:50 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 09:59:55 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 09:59:55 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:00 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:00 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:05 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:05 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:10 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:10 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:15 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:15 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:20 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:20 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:25 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:25 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:30 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:30 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:35 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:35 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:40 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:40 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:45 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:45 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:50 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:50 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:00:55 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:00:55 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:00 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:00 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:05 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:05 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:10 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:10 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:15 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:15 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:20 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:20 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:25 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:25 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:30 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:30 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:35 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:35 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:40 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:40 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:45 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:45 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:50 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:50 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:01:55 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:01:55 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:02:00 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:02:00 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:02:01 GMT-0800 (Pacific Standard Time) Exiting the app
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) -------------------
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) Debugging started
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) Node version: 12.0.0
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) AppName: Sphinx
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) Transport: log
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) Transport HTTP Endpoint: https://localhost:10601
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) [Log] Identifying the app
+Tue Dec 29 2020 10:10:23 GMT-0800 (Pacific Standard Time) Request sent
+{
+    "url": "https://api.stackify.com/Metrics/IdentifyApp",
+    "method": "POST",
+    "json": true,
+    "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Stackify-Key": "1Zr4Tk1Pd2Qp2To5To5Lp5Yd9Hi6Om6Bw8Da2Vx",
+        "X-Stackify-PV": "V1"
+    },
+    "body": {
+        "DeviceName": "evan.local",
+        "AppName": "Sphinx",
+        "ConfiguredAppName": "Sphinx",
+        "AppLocation": "/Users/evanfeenstra/code/sphinx-relay",
+        "ConfiguredEnvironmentName": "Dev"
+    }
+}
+Tue Dec 29 2020 10:10:25 GMT-0800 (Pacific Standard Time) Response received
+url: https://api.stackify.com/Metrics/IdentifyApp:443, method: POST, status: 200
+response: {
+    "DeviceID": null,
+    "DeviceAppID": null,
+    "AppNameID": "b272db8e-fe49-eb11-a607-501ac5f9ed47",
+    "EnvID": 3,
+    "Env": "Dev",
+    "AppName": "Sphinx",
+    "AppEnvID": "b5f93dc5-c7a4-4892-b0b1-820335ae0446",
+    "DeviceAlias": "evan.local"
+}
+Tue Dec 29 2020 10:10:25 GMT-0800 (Pacific Standard Time) [Log] Successfully identified
+Tue Dec 29 2020 10:10:30 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:10:30 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:10:35 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:10:35 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:10:51 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:10:51 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:10:51 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:10:51 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:10:51 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:10:51 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:08 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:08 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:08 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:08 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:08 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:08 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:23 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:23 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:23 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:23 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:23 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:23 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:37 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:37 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:37 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:37 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:37 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:37 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:52 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:52 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:52 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:52 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:11:52 GMT-0800 (Pacific Standard Time) Running Logger Job
+Tue Dec 29 2020 10:11:52 GMT-0800 (Pacific Standard Time) Checking the queue: 0 messages
+Tue Dec 29 2020 10:12:07 GMT-0800 (Pacific Standard Time) Exiting the app

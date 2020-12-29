@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
-    "@scout_apm/scout-apm": "^0.1.10",
+    "@scout_apm/scout-apm": "^0.1.12",
     "@types/node": "^13.5.1",
     "async": "^2.6.2",
     "async-lock": "^1.2.2",

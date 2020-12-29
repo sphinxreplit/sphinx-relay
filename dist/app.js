@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const scout = require("@scout_apm/scout-apm");
 const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
@@ -69,7 +70,14 @@ function finishSetup() {
 function setupApp() {
     return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
         var _a, _b, _c;
+        yield scout.install({
+            allowShutdown: true,
+            monitor: true,
+            name: "Sphinx",
+            key: "OPYhjsSDsH6Yi57NsrFE",
+        });
         const app = express();
+        app.use(scout.expressMiddleware());
         app.use(helmet());
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));

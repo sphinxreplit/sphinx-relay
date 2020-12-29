@@ -1,3 +1,6 @@
+const scout = require("@scout_apm/scout-apm");
+
+
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as helmet from 'helmet'
@@ -59,7 +62,16 @@ async function finishSetup() {
 function setupApp() {
 	return new Promise(async resolve => {
 
+		await scout.install({
+			allowShutdown: true, // allow shutting down spawned scout-agent processes from this program
+			monitor: true, // enable monitoring
+			name: "Sphinx",
+			key: "OPYhjsSDsH6Yi57NsrFE",
+		});
+
 		const app = express();
+
+		app.use(scout.expressMiddleware());
 
 		app.use(helmet());
 		app.use(bodyParser.json());
