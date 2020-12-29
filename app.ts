@@ -1,4 +1,6 @@
 require('stackify-node-apm')
+var stackify = require('stackify-logger');
+stackify.start({apiKey: '1Zr4Tk1Pd2Qp2To5To5Lp5Yd9Hi6Om6Bw8Da2Vx', appName: 'Sphinx', env: 'Production', debug: true});
 
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
