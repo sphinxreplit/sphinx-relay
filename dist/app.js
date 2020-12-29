@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require('stackify-node-apm');
 const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
