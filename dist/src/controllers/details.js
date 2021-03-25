@@ -254,6 +254,7 @@ function clearForTesting(req, res) {
         if (!req.owner)
             return res_1.failure(res, "no owner");
         const tenant = req.owner.id;
+        console.log('config.allow_test_clearing', config.allow_test_clearing);
         if (!config.allow_test_clearing) {
             return res_1.failure(res, "nope");
         }

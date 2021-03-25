@@ -241,7 +241,7 @@ async function asyncForEach(array, callback) {
 export async function clearForTesting(req, res) {
   if (!req.owner) return failure(res, "no owner");
   const tenant: number = req.owner.id;
-
+  console.log('config.allow_test_clearing', config.allow_test_clearing)
   if (!config.allow_test_clearing) {
     return failure(res, "nope");
   }
