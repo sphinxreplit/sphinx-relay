@@ -68,6 +68,7 @@ export async function set(app) {
   app.post("/public_pic", contacts.uploadPublicPic)
 
   app.get("/msgs", messages.getMsgs);
+  app.get("/msgs/:chat_id", messages.getMsgsForChat);
   app.get("/allmessages", messages.getAllMessages);
   app.get("/messages", messages.getMessages);
   app.delete("/message/:id", messages.deleteMessage);

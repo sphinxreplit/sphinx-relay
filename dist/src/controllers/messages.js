@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clearMessages = exports.readMessages = exports.receiveDeleteMessage = exports.receiveRepayment = exports.receiveBoost = exports.receiveMessage = exports.sendMessage = exports.deleteMessage = exports.getMsgs = exports.getAllMessages = exports.getMessages = void 0;
+exports.clearMessages = exports.readMessages = exports.receiveDeleteMessage = exports.receiveRepayment = exports.receiveBoost = exports.receiveMessage = exports.sendMessage = exports.deleteMessage = exports.getMsgsForChat = exports.getMsgs = exports.getAllMessages = exports.getMessages = void 0;
 const models_1 = require("../models");
 const sequelize_1 = require("sequelize");
 const underscore_1 = require("underscore");
@@ -24,7 +24,7 @@ const network = require("../network");
 const short = require("short-uuid");
 const constants_1 = require("../constants");
 const logger_1 = require("../utils/logger");
-// import { date } from "yup/lib/locale";
+const moment = require("moment");
 const getMessages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.owner)
         return res_1.failure(res, "no owner");
@@ -131,8 +131,9 @@ const getAllMessages = (req, res) => __awaiter(void 0, void 0, void 0, function*
     // console.log("=> found all chats", chats && chats.length);
     const chatsById = underscore_1.indexBy(chats, "id");
     // console.log("=> indexed chats");
+    const reversedMessages = messages.reverse();
     res_1.success(res, {
-        new_messages: messages.map((message) => jsonUtils.messageToJson(message, chatsById[parseInt(message.chatId)])),
+        new_messages: reversedMessages.map((message) => jsonUtils.messageToJson(message, chatsById[parseInt(message.chatId)])),
         confirmed_messages: [],
     });
 });
@@ -182,6 +183,48 @@ const getMsgs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     });
 });
 exports.getMsgs = getMsgs;
+const getMsgsForChat = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!req.owner)
+        return res_1.failure(res, "no owner");
+    const chat_id = parseInt(req.params.chat_id);
+    if (!chat_id) {
+        return res_1.failure(res, 'no chat id');
+    }
+    const tenant = req.owner.id;
+    const limit = req.query.limit && parseInt(req.query.limit);
+    const offset = req.query.offset && parseInt(req.query.offset);
+    let dateToReturn = req.query.date;
+    if (!dateToReturn) {
+        dateToReturn = moment(0).utc().format('YYYY-MM-DD%20HH:mm:ss');
+    }
+    if (logger_1.logging.Express) {
+        console.log(`=> getMsgsForChat, limit: ${limit}, offset: ${offset}`);
+    }
+    const clause = {
+        order: [["id", "asc"]],
+        where: {
+            updated_at: { [sequelize_1.Op.gte]: dateToReturn },
+            tenant,
+            chat_id
+        },
+    };
+    if (limit) {
+        clause.limit = limit;
+        clause.offset = offset;
+    }
+    const messages = yield models_1.models.Message.findAll(clause);
+    if (logger_1.logging.Express) {
+        console.log("=> got msgs for chat", messages && messages.length);
+    }
+    let chat = yield models_1.models.Chat.findOne({
+        where: { deleted: false, id: chat_id, tenant },
+    });
+    const reversedMessages = messages.reverse();
+    res_1.success(res, {
+        new_messages: reversedMessages.map((message) => jsonUtils.messageToJson(message, chat)),
+    });
+});
+exports.getMsgsForChat = getMsgsForChat;
 function deleteMessage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!req.owner)

@@ -12,7 +12,7 @@ import * as network from "../network";
 import * as short from "short-uuid";
 import constants from "../constants";
 import { logging } from "../utils/logger";
-// import { date } from "yup/lib/locale";
+import * as moment from 'moment'
 
 export const getMessages = async (req, res) => {
   if (!req.owner) return failure(res, "no owner");
@@ -140,8 +140,9 @@ export const getAllMessages = async (req, res) => {
   // console.log("=> found all chats", chats && chats.length);
   const chatsById = indexBy(chats, "id");
   // console.log("=> indexed chats");
+  const reversedMessages = messages.reverse()
   success(res, {
-    new_messages: messages.map((message) =>
+    new_messages: reversedMessages.map((message) =>
       jsonUtils.messageToJson(message, chatsById[parseInt(message.chatId)])
     ),
     confirmed_messages: [],
@@ -195,6 +196,53 @@ export const getMsgs = async (req, res) => {
   success(res, {
     new_messages: messages.map((message) =>
       jsonUtils.messageToJson(message, chatsById[parseInt(message.chatId)])
+    ),
+  });
+};
+
+export const getMsgsForChat = async (req, res) => {
+  if (!req.owner) return failure(res, "no owner");
+  const chat_id = parseInt(req.params.chat_id);
+  if(!chat_id) {
+    return failure(res, 'no chat id')
+  }
+  const tenant: number = req.owner.id;
+
+  const limit = req.query.limit && parseInt(req.query.limit);
+  const offset = req.query.offset && parseInt(req.query.offset);
+  let dateToReturn = req.query.date;
+  if (!dateToReturn) {
+    dateToReturn = moment(0).utc().format('YYYY-MM-DD%20HH:mm:ss')
+  }
+
+  if (logging.Express) {
+    console.log(`=> getMsgsForChat, limit: ${limit}, offset: ${offset}`);
+  }
+
+  const clause: { [k: string]: any } = {
+    order: [["id", "asc"]],
+    where: {
+      updated_at: { [Op.gte]: dateToReturn },
+      tenant,
+      chat_id
+    },
+  };
+  if (limit) {
+    clause.limit = limit;
+    clause.offset = offset;
+  }
+  const messages = await models.Message.findAll(clause);
+  if (logging.Express) {
+    console.log("=> got msgs for chat", messages && messages.length);
+  }
+
+  let chat = await models.Chat.findOne({
+    where: { deleted: false, id: chat_id, tenant },
+  })
+  const reversedMessages = messages.reverse()
+  success(res, {
+    new_messages: reversedMessages.map((message) =>
+      jsonUtils.messageToJson(message, chat)
     ),
   });
 };
