@@ -3,6 +3,7 @@ import * as md5 from 'md5'
 import * as network from './network'
 import constants from './constants'
 import { logging } from './utils/logger'
+import { Op } from "sequelize";
 
 export const findOrCreateChat = async (params) => {
 	const { chat_id, owner_id, recipient_id } = params
@@ -23,7 +24,7 @@ export const findOrCreateChat = async (params) => {
 		const uuid = md5([owner.publicKey, recipient.publicKey].sort().join("-"))
 
 		// find by uuid
-		chat = await models.Chat.findOne({ where: { uuid, tenant:owner_id, deleted:false } })
+		chat = await models.Chat.findOne({ where: { uuid, tenant:owner_id, deleted:{[Op.ne]: true} } })
 
 		if (!chat) { // no chat! create new
 			console.log("=> no chat! create new")
@@ -36,7 +37,7 @@ export const findOrCreateChat = async (params) => {
 				tenant: owner_id,
 			})
 		} else {
-			console.log('findOrCreateChat: chat with this UUID already exists')
+			console.log('findOrCreateChat: chat with this UUID already exists:', uuid)
 		}
 	}
 	return chat
@@ -147,7 +148,7 @@ export async function findOrCreateContactByPubkeyAndRouteHint(senderPubKey:strin
 }
 
 export async function findOrCreateChatByUUID(chat_uuid, contactIds, tenant) {
-	let chat = await models.Chat.findOne({ where: { uuid: chat_uuid, tenant, deleted:false } })
+	let chat = await models.Chat.findOne({ where: { uuid: chat_uuid, tenant, deleted:{[Op.ne]:true} } })
 	if (!chat) {
 		var date = new Date();
 		date.setMilliseconds(0)
