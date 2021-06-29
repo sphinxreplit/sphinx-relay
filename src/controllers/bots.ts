@@ -216,6 +216,7 @@ export async function botKeysend(
       },
     },
   };
+  console.log('botKeysend', opts)
   try {
     await network.signAndSend(opts, owner);
     return true;

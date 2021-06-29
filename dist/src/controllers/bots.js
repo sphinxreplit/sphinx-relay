@@ -195,6 +195,7 @@ function botKeysend(msg_type, bot_uuid, botmaker_pubkey, amount, chat_uuid, owne
                 },
             },
         };
+        console.log('botKeysend', opts);
         try {
             yield network.signAndSend(opts, owner);
             return true;
