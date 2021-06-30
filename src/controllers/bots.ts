@@ -221,6 +221,7 @@ export async function botKeysend(
     await network.signAndSend(opts, owner);
     return true;
   } catch (e) {
+    console.log('keysend error', e)
     return false;
   }
 }

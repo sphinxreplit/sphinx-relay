@@ -8,7 +8,7 @@ import constants from '../constants'
 import { getMacaroon } from './macaroon'
 import { loadConfig } from './config'
 import {isProxy, loadProxyLightning} from './proxy'
-import {logging} from './logger'
+// import {logging} from './logger'
 
 // var protoLoader = require('@grpc/proto-loader')
 const config = loadConfig()
@@ -723,7 +723,7 @@ export {
 //     return lightningClient
 //   }
 // }
-let yeslog = logging.Lightning
+let yeslog = true
 function log(a?,b?,c?){
   if(!yeslog) return
   console.log("[lightning]", [...arguments])

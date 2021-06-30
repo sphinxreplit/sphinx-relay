@@ -201,6 +201,7 @@ function botKeysend(msg_type, bot_uuid, botmaker_pubkey, amount, chat_uuid, owne
             return true;
         }
         catch (e) {
+            console.log('keysend error', e);
             return false;
         }
     });
