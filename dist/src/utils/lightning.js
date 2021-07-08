@@ -219,7 +219,7 @@ function sendPayment(payment_request, ownerPubkey) {
                     }
                     else {
                         if (response.payment_error) {
-                            console.log("sendPaymentSync response.payment_error", response.payment_error);
+                            console.log("sendPaymentSync response.payment_error", response.payment_error, response.payment_error.length);
                             reject(response.payment_error);
                         }
                         else {

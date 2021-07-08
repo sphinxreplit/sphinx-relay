@@ -207,7 +207,7 @@ async function sendPayment(payment_request:string, ownerPubkey?:string) {
         }
         else {
           if(response.payment_error) {
-            console.log("sendPaymentSync response.payment_error", response.payment_error)
+            console.log("sendPaymentSync response.payment_error", response.payment_error, response.payment_error.length)
             reject(response.payment_error)
           } else {
             resolve(response)
