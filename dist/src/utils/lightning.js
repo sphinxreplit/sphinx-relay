@@ -211,12 +211,15 @@ function sendPayment(payment_request, ownerPubkey) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             let lightning = yield loadLightning(true, ownerPubkey); // try proxy
             if (proxy_1.isProxy()) {
+                console.log('isProxy() sendPaymentSync');
                 lightning.sendPaymentSync({ payment_request }, (err, response) => {
                     if (err) {
+                        console.log("sendPaymentSync err", err);
                         reject(err);
                     }
                     else {
                         if (response.payment_error) {
+                            console.log("sendPaymentSync response.payment_error", response.payment_error);
                             reject(response.payment_error);
                         }
                         else {
