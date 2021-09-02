@@ -17,31 +17,37 @@ export async function getQR(): Promise<string> {
 
   const public_url = config.public_url
   if (public_url) theIP = public_url
+  console.log('public url ', theIP)
 
   if (!theIP) {
     theIP = process.env.NODE_IP
+    console.log('proce.enc.NODE_IP', theIP)
     if (!theIP) {
       try {
         if (IS_GREENLIGHT) {
           theIP = localip.address()
         } else {
           theIP = await publicIp.v4()
+          console.log('PUBLICKIP v4', theIP)
         }
       } catch (e) {}
     }
     const isIP = net.isIP(theIP)
+    console.log('isip?', isIP)
     if (isIP) {
       // add port if its an IP address
       const port = config.node_http_port
       theIP = port ? `${theIP}:${port}` : theIP
     }
   }
+  console.log('555', theIP)
   if (!theIP.includes('://')) {
     // no protocol
     if (config.node_http_protocol) {
       theIP = `${config.node_http_protocol}://${theIP}`
     }
   }
+  console.log('777', theIP)
   return Buffer.from(`ip::${theIP}::${password || ''}`).toString('base64')
 }
 
