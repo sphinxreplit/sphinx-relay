@@ -16,6 +16,7 @@ export function subscribeInvoices(parseKeysendInvoice) {
 
     const cmd = interfaces.subscribeCommand()
     var call = lightning[cmd]()
+    console.log('***  CMD ', cmd, call)
     call.on('data', async function (response) {
       console.log('*** INVOICE RAW', response)
       const inv = interfaces.subscribeResponse(response)

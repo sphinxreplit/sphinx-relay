@@ -25,6 +25,7 @@ function subscribeInvoices(parseKeysendInvoice) {
         const lightning = yield lightning_1.loadLightning(true); // try proxy
         const cmd = interfaces.subscribeCommand();
         var call = lightning[cmd]();
+        console.log('***  CMD ', cmd, call);
         call.on('data', function (response) {
             return __awaiter(this, void 0, void 0, function* () {
                 console.log('*** INVOICE RAW', response);
