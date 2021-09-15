@@ -20,13 +20,14 @@ const ERR_CODE_UNAVAILABLE = 14;
 const ERR_CODE_STREAM_REMOVED = 2;
 const ERR_CODE_UNIMPLEMENTED = 12; // locked
 function subscribeInvoices(parseKeysendInvoice) {
+    console.log('*** subscribeInvoices');
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         const lightning = yield lightning_1.loadLightning(true); // try proxy
         const cmd = interfaces.subscribeCommand();
         var call = lightning[cmd]();
         call.on('data', function (response) {
             return __awaiter(this, void 0, void 0, function* () {
-                // console.log("=> INVOICE RAW", response)
+                console.log('*** INVOICE RAW', response);
                 const inv = interfaces.subscribeResponse(response);
                 // console.log("INVOICE RECEIVED", inv)
                 // loginvoice(inv)

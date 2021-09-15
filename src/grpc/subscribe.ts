@@ -10,13 +10,14 @@ const ERR_CODE_STREAM_REMOVED = 2
 const ERR_CODE_UNIMPLEMENTED = 12 // locked
 
 export function subscribeInvoices(parseKeysendInvoice) {
+  console.log('*** subscribeInvoices')
   return new Promise(async (resolve, reject) => {
     const lightning = await loadLightning(true) // try proxy
 
     const cmd = interfaces.subscribeCommand()
     var call = lightning[cmd]()
     call.on('data', async function (response) {
-      // console.log("=> INVOICE RAW", response)
+      console.log('*** INVOICE RAW', response)
       const inv = interfaces.subscribeResponse(response)
       // console.log("INVOICE RECEIVED", inv)
       // loginvoice(inv)
