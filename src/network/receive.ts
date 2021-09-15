@@ -67,6 +67,7 @@ const botMakerTypes = [
   constants.message_types.bot_cmd,
 ]
 async function onReceive(payload: { [k: string]: any }, dest: string) {
+  console.log('*** ON RECEIVE!', payload, dest)
   if (dest) {
     if (typeof dest !== 'string' || dest.length !== 66)
       return console.log('INVALID DEST', dest)
@@ -482,11 +483,13 @@ async function saveAnonymousKeysend(inv, memo, sender_pubkey, tenant) {
 }
 
 export async function parseKeysendInvoice(i) {
+  console.log('*** praseKeysendInvoice')
   const recs = i.htlcs && i.htlcs[0] && i.htlcs[0].custom_records
 
   let dest = ''
   let owner
   if (isProxy()) {
+    console.log('*** PROXY PARSE KEYSEND INVOICE', i.payment_request)
     try {
       const invoice = bolt11.decode(i.payment_request)
       if (!invoice.payeeNodeKey)

@@ -73,6 +73,7 @@ const botMakerTypes = [
 ];
 function onReceive(payload, dest) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log('*** ON RECEIVE!', payload, dest);
         if (dest) {
             if (typeof dest !== 'string' || dest.length !== 66)
                 return console.log('INVALID DEST', dest);
@@ -480,10 +481,12 @@ function saveAnonymousKeysend(inv, memo, sender_pubkey, tenant) {
 }
 function parseKeysendInvoice(i) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log('*** praseKeysendInvoice');
         const recs = i.htlcs && i.htlcs[0] && i.htlcs[0].custom_records;
         let dest = '';
         let owner;
         if (proxy_1.isProxy()) {
+            console.log('*** PROXY PARSE KEYSEND INVOICE', i.payment_request);
             try {
                 const invoice = bolt11.decode(i.payment_request);
                 if (!invoice.payeeNodeKey)
