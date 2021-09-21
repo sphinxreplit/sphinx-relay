@@ -174,18 +174,15 @@ export const getLocalRemoteBalance = async (req, res) => {
     const channelList = await Lightning.listChannels({})
     const { channels } = channelList
 
-    const localBalances: number[] = channels.map((c) =>
-      parseInt(c.local_balance)
-    )
+    const blcs = await Lightning.complexBalances(req.owner.publicKey)
     const remoteBalances: number[] = channels.map((c) =>
       parseInt(c.remote_balance)
     )
-    const totalLocalBalance = localBalances.reduce((a, b) => a + b, 0)
     const totalRemoteBalance = remoteBalances.reduce((a, b) => a + b, 0)
     res.json({
       success: true,
       response: {
-        local_balance: totalLocalBalance,
+        local_balance: blcs.balance,
         remote_balance: totalRemoteBalance,
       },
     })
