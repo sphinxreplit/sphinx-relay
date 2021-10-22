@@ -11,6 +11,7 @@ const ERR_CODE_STREAM_REMOVED = 2
 const ERR_CODE_UNIMPLEMENTED = 12 // locked
 
 export function subscribeInvoices(parseKeysendInvoice) {
+  console.log('=> SUBSCRIBE INVOICES!!!!!')
   return new Promise(async (resolve, reject) => {
     let ownerPubkey: string = ''
     if (isProxy()) {
@@ -23,7 +24,7 @@ export function subscribeInvoices(parseKeysendInvoice) {
     call.on('data', async function (response) {
       // console.log("=> INVOICE RAW", response)
       const inv = interfaces.subscribeResponse(response)
-      // console.log("INVOICE RECEIVED", inv)
+      console.log('=> INVOICE RECEIVED', inv)
       // loginvoice(inv)
       if (inv.state !== interfaces.InvoiceState.SETTLED) {
         return

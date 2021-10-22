@@ -21,6 +21,7 @@ const ERR_CODE_UNAVAILABLE = 14;
 const ERR_CODE_STREAM_REMOVED = 2;
 const ERR_CODE_UNIMPLEMENTED = 12; // locked
 function subscribeInvoices(parseKeysendInvoice) {
+    console.log('=> SUBSCRIBE INVOICES!!!!!');
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         let ownerPubkey = '';
         if ((0, proxy_1.isProxy)()) {
@@ -33,7 +34,7 @@ function subscribeInvoices(parseKeysendInvoice) {
             return __awaiter(this, void 0, void 0, function* () {
                 // console.log("=> INVOICE RAW", response)
                 const inv = interfaces.subscribeResponse(response);
-                // console.log("INVOICE RECEIVED", inv)
+                console.log('=> INVOICE RECEIVED', inv);
                 // loginvoice(inv)
                 if (inv.state !== interfaces.InvoiceState.SETTLED) {
                     return;
