@@ -78,7 +78,7 @@ function onReceive(payload, dest) {
                 return console.log('INVALID DEST', dest);
         }
         payload.dest = dest; // add "dest" into payload
-        // console.log("===> onReceive", JSON.stringify(payload, null, 2));
+        console.log('===> onReceive', JSON.stringify(payload, null, 2));
         if (!(payload.type || payload.type === 0))
             return console.log('no payload.type');
         let owner = yield models_1.models.Contact.findOne({
@@ -252,7 +252,7 @@ function onReceive(payload, dest) {
 }
 function doTheAction(data, owner) {
     return __awaiter(this, void 0, void 0, function* () {
-        // console.log("=> doTheAction", data, owner)
+        console.log('=> doTheAction', data, owner);
         let payload = data;
         if (payload.isTribeOwner) {
             // this is only for storing locally, my own messages as tribe owner
