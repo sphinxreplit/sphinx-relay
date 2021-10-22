@@ -256,7 +256,7 @@ async function onReceive(payload: { [k: string]: any }, dest: string) {
 }
 
 async function doTheAction(data, owner) {
-  console.log('=> doTheAction', data, owner)
+  // console.log('=> doTheAction', data, owner)
   let payload = data
   if (payload.isTribeOwner) {
     // this is only for storing locally, my own messages as tribe owner
@@ -384,6 +384,7 @@ export async function initGrpcSubscriptions(noCache?: boolean) {
 }
 
 export async function receiveMqttMessage(topic, message) {
+  console.log('=> RECEIVE MQTT MESSAGE')
   try {
     const msg = message.toString()
     // check topic is signed by sender?
@@ -482,6 +483,7 @@ async function saveAnonymousKeysend(inv, memo, sender_pubkey, tenant) {
 }
 
 export async function parseKeysendInvoice(i) {
+  console.log('=> PARSE KEYSEND INVOICE')
   const recs = i.htlcs && i.htlcs[0] && i.htlcs[0].custom_records
 
   let dest = ''

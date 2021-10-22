@@ -252,7 +252,7 @@ function onReceive(payload, dest) {
 }
 function doTheAction(data, owner) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('=> doTheAction', data, owner);
+        // console.log('=> doTheAction', data, owner)
         let payload = data;
         if (payload.isTribeOwner) {
             // this is only for storing locally, my own messages as tribe owner
@@ -374,6 +374,7 @@ function initGrpcSubscriptions(noCache) {
 exports.initGrpcSubscriptions = initGrpcSubscriptions;
 function receiveMqttMessage(topic, message) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log('=> RECEIVE MQTT MESSAGE');
         try {
             const msg = message.toString();
             // check topic is signed by sender?
@@ -480,6 +481,7 @@ function saveAnonymousKeysend(inv, memo, sender_pubkey, tenant) {
 }
 function parseKeysendInvoice(i) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log('=> PARSE KEYSEND INVOICE');
         const recs = i.htlcs && i.htlcs[0] && i.htlcs[0].custom_records;
         let dest = '';
         let owner;
