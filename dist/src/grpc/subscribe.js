@@ -33,7 +33,7 @@ function subscribeInvoices(parseKeysendInvoice) {
             return __awaiter(this, void 0, void 0, function* () {
                 // console.log("=> INVOICE RAW", response)
                 const inv = interfaces.subscribeResponse(response);
-                // console.log("INVOICE RECEIVED", inv)
+                console.log('INVOICE RECEIVED', inv);
                 // loginvoice(inv)
                 if (inv.state !== interfaces.InvoiceState.SETTLED) {
                     return;

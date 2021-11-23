@@ -23,7 +23,7 @@ export function subscribeInvoices(parseKeysendInvoice) {
     call.on('data', async function (response) {
       // console.log("=> INVOICE RAW", response)
       const inv = interfaces.subscribeResponse(response)
-      // console.log("INVOICE RECEIVED", inv)
+      console.log('INVOICE RECEIVED', inv)
       // loginvoice(inv)
       if (inv.state !== interfaces.InvoiceState.SETTLED) {
         return
