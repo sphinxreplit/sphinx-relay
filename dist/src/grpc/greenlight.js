@@ -25,7 +25,8 @@ const config = (0, config_1.loadConfig)();
 function initGreenlight() {
     return __awaiter(this, void 0, void 0, function* () {
         logger_1.sphinxLogger.info('=> initGreenlight');
-        // if (GID && GID.initialized) return
+        if (GID && GID.initialized)
+            return console.log('[greenlight] dont re-init');
         yield startGreenlightInit();
         // await streamHsmRequests()
     });
