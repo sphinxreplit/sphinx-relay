@@ -90,10 +90,7 @@ const checkInviteHub = async (params = {}) => {
               sendNotification(-1, contact.alias, 'invite', owner)
             }
           }
-          console.log('================================EY')
-          console.log('======== PUBKEY', pubkey)
-          console.log('======== dbInvite.status', dbInvite.status)
-          console.log('======== contact', contact)
+
           if (
             pubkey &&
             dbInvite.status == constants.invite_statuses.complete &&
@@ -122,6 +119,11 @@ const checkInviteHub = async (params = {}) => {
               sender: owner,
               type: constants.message_types.contact_key,
             })
+          } else {
+            console.log('================================EY')
+            console.log('======== PUBKEY', pubkey)
+            console.log('======== dbInvite.status', dbInvite.status)
+            console.log('======== contact', contact ? true : false)
           }
         })
       }

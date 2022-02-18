@@ -92,10 +92,6 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                         (0, notify_1.sendNotification)(-1, contact.alias, 'invite', owner);
                     }
                 }
-                console.log('================================EY');
-                console.log('======== PUBKEY', pubkey);
-                console.log('======== dbInvite.status', dbInvite.status);
-                console.log('======== contact', contact);
                 if (pubkey &&
                     dbInvite.status == constants_1.default.invite_statuses.complete &&
                     contact) {
@@ -117,6 +113,12 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                         sender: owner,
                         type: constants_1.default.message_types.contact_key,
                     });
+                }
+                else {
+                    console.log('================================EY');
+                    console.log('======== PUBKEY', pubkey);
+                    console.log('======== dbInvite.status', dbInvite.status);
+                    console.log('======== contact', contact ? true : false);
                 }
             }));
         }
