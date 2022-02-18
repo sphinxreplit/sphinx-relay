@@ -444,7 +444,9 @@ const receiveContactKey = (payload) => __awaiter(void 0, void 0, void 0, functio
                 tenant,
             },
         });
-        console.log('sender1', sender1.publicKey, sender1.status);
+        if (sender1) {
+            console.log('sender1', sender1.publicKey, sender1.status);
+        }
     }
     if (tenant == 13540) {
         console.log('===== INVITED');
@@ -455,7 +457,9 @@ const receiveContactKey = (payload) => __awaiter(void 0, void 0, void 0, functio
                 tenant,
             },
         });
-        console.log('sender2', sender2.publicKey, sender2.status);
+        if (sender2) {
+            console.log('sender2', sender2.publicKey, sender2.status);
+        }
     }
     logger_1.sphinxLogger.info(['=> received contact key from', sender_pub_key, tenant], logger_1.logging.Network);
     if (!sender_pub_key) {

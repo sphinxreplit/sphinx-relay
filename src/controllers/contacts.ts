@@ -478,7 +478,9 @@ export const receiveContactKey = async (payload) => {
         tenant,
       },
     })
-    console.log('sender1', sender1.publicKey, sender1.status)
+    if (sender1) {
+      console.log('sender1', sender1.publicKey, sender1.status)
+    }
   }
   if (tenant == 13540) {
     console.log('===== INVITED')
@@ -489,7 +491,9 @@ export const receiveContactKey = async (payload) => {
         tenant,
       },
     })
-    console.log('sender2', sender2.publicKey, sender2.status)
+    if (sender2) {
+      console.log('sender2', sender2.publicKey, sender2.status)
+    }
   }
 
   sphinxLogger.info(
