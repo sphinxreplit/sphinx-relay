@@ -38,7 +38,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
     if (env != 'production') {
         return;
     }
-    console.log('[hub] checking invites ping');
+    // console.log('[hub] checking invites ping')
     const inviteStrings = yield models_1.models.Invite.findAll({
         where: {
             status: {
@@ -50,7 +50,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
         },
     }).map((invite) => invite.inviteString);
     if (inviteStrings.length === 0) {
-        return console.log('NO INVITES'); // skip if no invites
+        return console.log('=> NO INVITES'); // skip if no invites
     }
     (0, node_fetch_1.default)(config.hub_api_url + '/invites/check', {
         agent: checkInvitesAgent,
@@ -66,7 +66,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                 const pubkey = object.pubkey;
                 const routeHint = object.route_hint;
                 const price = object.price;
-                logger_1.sphinxLogger.info('[hub] invite complete for', pubkey);
+                // sphinxLogger.info('[hub] invite complete for', pubkey)
                 const dbInvite = yield models_1.models.Invite.findOne({
                     where: { inviteString: invite.pin },
                 });
@@ -83,7 +83,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                     };
                     if (invite.invoice)
                         updateObj.invoice = invite.invoice;
-                    dbInvite.update(updateObj);
+                    yield dbInvite.update(updateObj);
                     socket.sendJson({
                         type: 'invite',
                         response: jsonUtils.inviteToJson(dbInvite),
@@ -101,24 +101,19 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                     };
                     if (routeHint)
                         updateObj.routeHint = routeHint;
-                    contact.update(updateObj);
+                    yield contact.update(updateObj);
                     var contactJson = jsonUtils.contactToJson(contact);
                     contactJson.invite = jsonUtils.inviteToJson(dbInvite);
                     socket.sendJson({
                         type: 'contact',
                         response: contactJson,
                     }, owner.id);
+                    console.log('===> SEND CONTACT KEYS', contact.id);
                     helpers.sendContactKeys({
                         contactIds: [contact.id],
                         sender: owner,
                         type: constants_1.default.message_types.contact_key,
                     });
-                }
-                else {
-                    console.log('================================EY');
-                    console.log('======== PUBKEY', pubkey);
-                    console.log('======== dbInvite.status', dbInvite.status);
-                    console.log('======== contact', contact ? true : false);
                 }
             }));
         }

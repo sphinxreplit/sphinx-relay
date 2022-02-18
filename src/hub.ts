@@ -27,7 +27,7 @@ const checkInviteHub = async (params = {}) => {
   if (env != 'production') {
     return
   }
-  console.log('[hub] checking invites ping')
+  // console.log('[hub] checking invites ping')
 
   const inviteStrings = await models.Invite.findAll({
     where: {
@@ -40,7 +40,7 @@ const checkInviteHub = async (params = {}) => {
     },
   }).map((invite) => invite.inviteString)
   if (inviteStrings.length === 0) {
-    return console.log('NO INVITES') // skip if no invites
+    return console.log('=> NO INVITES') // skip if no invites
   }
 
   fetch(config.hub_api_url + '/invites/check', {
@@ -57,7 +57,7 @@ const checkInviteHub = async (params = {}) => {
           const pubkey = object.pubkey
           const routeHint = object.route_hint
           const price = object.price
-          sphinxLogger.info('[hub] invite complete for', pubkey)
+          // sphinxLogger.info('[hub] invite complete for', pubkey)
 
           const dbInvite = await models.Invite.findOne({
             where: { inviteString: invite.pin },
@@ -76,7 +76,7 @@ const checkInviteHub = async (params = {}) => {
             }
             if (invite.invoice) updateObj.invoice = invite.invoice
 
-            dbInvite.update(updateObj)
+            await dbInvite.update(updateObj)
 
             socket.sendJson(
               {
@@ -101,7 +101,7 @@ const checkInviteHub = async (params = {}) => {
               status: constants.contact_statuses.confirmed,
             }
             if (routeHint) updateObj.routeHint = routeHint
-            contact.update(updateObj)
+            await contact.update(updateObj)
 
             var contactJson = jsonUtils.contactToJson(contact)
             contactJson.invite = jsonUtils.inviteToJson(dbInvite)
@@ -114,16 +114,12 @@ const checkInviteHub = async (params = {}) => {
               owner.id
             )
 
+            console.log('===> SEND CONTACT KEYS', contact.id)
             helpers.sendContactKeys({
               contactIds: [contact.id],
               sender: owner,
               type: constants.message_types.contact_key,
             })
-          } else {
-            console.log('================================EY')
-            console.log('======== PUBKEY', pubkey)
-            console.log('======== dbInvite.status', dbInvite.status)
-            console.log('======== contact', contact ? true : false)
           }
         })
       }

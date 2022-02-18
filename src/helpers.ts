@@ -102,8 +102,8 @@ export const sendContactKeys = async ({
     destination_key = contact.publicKey
     const route_hint = contact.routeHint
 
-    // console.log("=> KEY EXCHANGE", msg)
-    // console.log("=> TO", destination_key, route_hint)
+    console.log('=> KEY EXCHANGE', msg)
+    console.log('=> TO', destination_key, route_hint)
     await performKeysendMessage({
       sender,
       destination_key,
