@@ -193,6 +193,7 @@ export async function findOrCreateContactByPubkeyAndRouteHint(
       contactIds: [sender.id],
       sender: owner,
       type: constants.message_types.contact_key,
+      routeHint: senderRouteHint,
     })
   } else {
     if (sender.unmet) {

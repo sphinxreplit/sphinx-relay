@@ -282,6 +282,7 @@ const updateContact = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         sender: owner,
         type: constants_1.default.message_types.contact_key,
         dontActuallySendContactKey: !contactKeyChanged,
+        routeHint: attrs['route_hint'],
     });
 });
 exports.updateContact = updateContact;
@@ -306,6 +307,7 @@ const exchangeKeys = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         contactIds: [contact.id],
         sender: owner,
         type: constants_1.default.message_types.contact_key,
+        routeHint: contact.routeHint,
     });
 });
 exports.exchangeKeys = exchangeKeys;
@@ -338,6 +340,7 @@ const createContact = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 contactIds: [existing.id],
                 sender: owner,
                 type: constants_1.default.message_types.contact_key,
+                routeHint: existing.routeHint,
             });
         }
         return (0, res_1.success)(res, jsonUtils.contactToJson(existing));
@@ -352,6 +355,7 @@ const createContact = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         contactIds: [contact.id],
         sender: owner,
         type: constants_1.default.message_types.contact_key,
+        routeHint: attrs['route_hint'],
     });
 });
 exports.createContact = createContact;

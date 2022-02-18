@@ -296,6 +296,7 @@ export const updateContact = async (req, res) => {
     sender: owner,
     type: constants.message_types.contact_key,
     dontActuallySendContactKey: !contactKeyChanged,
+    routeHint: attrs['route_hint'],
   })
 }
 
@@ -325,6 +326,7 @@ export const exchangeKeys = async (req, res) => {
     contactIds: [contact.id],
     sender: owner,
     type: constants.message_types.contact_key,
+    routeHint: contact.routeHint,
   })
 }
 
@@ -362,6 +364,7 @@ export const createContact = async (req, res) => {
         contactIds: [existing.id],
         sender: owner,
         type: constants.message_types.contact_key,
+        routeHint: existing.routeHint,
       })
     }
     return success(res, jsonUtils.contactToJson(existing))
@@ -380,6 +383,7 @@ export const createContact = async (req, res) => {
     contactIds: [contact.id],
     sender: owner,
     type: constants.message_types.contact_key,
+    routeHint: attrs['route_hint'],
   })
 }
 

@@ -117,6 +117,7 @@ const checkInviteHub = async (params = {}) => {
               contactIds: [contact.id],
               sender: owner,
               type: constants.message_types.contact_key,
+              routeHint,
             })
           }
         })

@@ -111,6 +111,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                         contactIds: [contact.id],
                         sender: owner,
                         type: constants_1.default.message_types.contact_key,
+                        routeHint,
                     });
                 }
             }));

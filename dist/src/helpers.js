@@ -157,6 +157,7 @@ function findOrCreateContactByPubkeyAndRouteHint(senderPubKey, senderRouteHint, 
                 contactIds: [sender.id],
                 sender: owner,
                 type: constants_1.default.message_types.contact_key,
+                routeHint: senderRouteHint,
             });
         }
         else {
