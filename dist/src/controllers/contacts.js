@@ -435,6 +435,28 @@ const receiveContactKey = (payload) => __awaiter(void 0, void 0, void 0, functio
     const sender_photo_url = dat.sender.photo_url;
     const owner = payload.owner;
     const tenant = owner.id;
+    if (tenant == 124) {
+        console.log('===== INVITER');
+        console.log('sender_route_hint', sender_route_hint);
+        const sender1 = yield models_1.models.Contact.findOne({
+            where: {
+                publicKey: sender_pub_key,
+                tenant,
+            },
+        });
+        console.log('sender1', sender1.publicKey, sender1.status);
+    }
+    if (tenant == 13540) {
+        console.log('===== INVITED');
+        console.log('sender_route_hint', sender_route_hint);
+        const sender2 = yield models_1.models.Contact.findOne({
+            where: {
+                publicKey: sender_pub_key,
+                tenant,
+            },
+        });
+        console.log('sender2', sender2.publicKey, sender2.status);
+    }
     logger_1.sphinxLogger.info(['=> received contact key from', sender_pub_key, tenant], logger_1.logging.Network);
     if (!sender_pub_key) {
         return logger_1.sphinxLogger.error('no pubkey!');
@@ -492,6 +514,26 @@ const receiveConfirmContactKey = (payload) => __awaiter(void 0, void 0, void 0, 
     const sender_photo_url = dat.sender.photo_url;
     const owner = dat.owner;
     const tenant = owner.id;
+    if (tenant == 124) {
+        console.log('confirm ===== INVITER');
+        const sender1 = yield models_1.models.Contact.findOne({
+            where: {
+                publicKey: sender_pub_key,
+                tenant,
+            },
+        });
+        console.log('confirm sender1', sender1.publicKey, sender1.status);
+    }
+    if (tenant == 13540) {
+        console.log('confirm ===== INVITED');
+        const sender2 = yield models_1.models.Contact.findOne({
+            where: {
+                publicKey: sender_pub_key,
+                tenant,
+            },
+        });
+        console.log('confirm sender2', sender2.publicKey, sender2.status);
+    }
     if (!sender_pub_key) {
         return logger_1.sphinxLogger.error('no pubkey!');
     }

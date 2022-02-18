@@ -469,6 +469,29 @@ export const receiveContactKey = async (payload) => {
   const owner = payload.owner
   const tenant: number = owner.id
 
+  if (tenant == 124) {
+    console.log('===== INVITER')
+    console.log('sender_route_hint', sender_route_hint)
+    const sender1 = await models.Contact.findOne({
+      where: {
+        publicKey: sender_pub_key,
+        tenant,
+      },
+    })
+    console.log('sender1', sender1.publicKey, sender1.status)
+  }
+  if (tenant == 13540) {
+    console.log('===== INVITED')
+    console.log('sender_route_hint', sender_route_hint)
+    const sender2 = await models.Contact.findOne({
+      where: {
+        publicKey: sender_pub_key,
+        tenant,
+      },
+    })
+    console.log('sender2', sender2.publicKey, sender2.status)
+  }
+
   sphinxLogger.info(
     ['=> received contact key from', sender_pub_key, tenant],
     logging.Network
@@ -533,6 +556,27 @@ export const receiveConfirmContactKey = async (payload) => {
   const sender_photo_url = dat.sender.photo_url
   const owner = dat.owner
   const tenant: number = owner.id
+
+  if (tenant == 124) {
+    console.log('confirm ===== INVITER')
+    const sender1 = await models.Contact.findOne({
+      where: {
+        publicKey: sender_pub_key,
+        tenant,
+      },
+    })
+    console.log('confirm sender1', sender1.publicKey, sender1.status)
+  }
+  if (tenant == 13540) {
+    console.log('confirm ===== INVITED')
+    const sender2 = await models.Contact.findOne({
+      where: {
+        publicKey: sender_pub_key,
+        tenant,
+      },
+    })
+    console.log('confirm sender2', sender2.publicKey, sender2.status)
+  }
 
   if (!sender_pub_key) {
     return sphinxLogger.error('no pubkey!')

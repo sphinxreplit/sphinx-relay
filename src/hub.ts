@@ -57,6 +57,7 @@ const checkInviteHub = async (params = {}) => {
           const pubkey = object.pubkey
           const routeHint = object.route_hint
           const price = object.price
+          sphinxLogger.info('[hub] invite complete for', pubkey)
 
           const dbInvite = await models.Invite.findOne({
             where: { inviteString: invite.pin },
