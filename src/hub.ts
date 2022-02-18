@@ -27,7 +27,7 @@ const checkInviteHub = async (params = {}) => {
   if (env != 'production') {
     return
   }
-  //console.log('[hub] checking invites ping')
+  console.log('[hub] checking invites ping')
 
   const inviteStrings = await models.Invite.findAll({
     where: {
@@ -40,7 +40,7 @@ const checkInviteHub = async (params = {}) => {
     },
   }).map((invite) => invite.inviteString)
   if (inviteStrings.length === 0) {
-    return // skip if no invites
+    return console.log('NO INVITES') // skip if no invites
   }
 
   fetch(config.hub_api_url + '/invites/check', {
@@ -90,7 +90,10 @@ const checkInviteHub = async (params = {}) => {
               sendNotification(-1, contact.alias, 'invite', owner)
             }
           }
-
+          console.log('================================EY')
+          console.log('======== PUBKEY', pubkey)
+          console.log('======== dbInvite.status', dbInvite.status)
+          console.log('======== contact', contact)
           if (
             pubkey &&
             dbInvite.status == constants.invite_statuses.complete &&

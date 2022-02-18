@@ -38,7 +38,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
     if (env != 'production') {
         return;
     }
-    //console.log('[hub] checking invites ping')
+    console.log('[hub] checking invites ping');
     const inviteStrings = yield models_1.models.Invite.findAll({
         where: {
             status: {
@@ -50,7 +50,7 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
         },
     }).map((invite) => invite.inviteString);
     if (inviteStrings.length === 0) {
-        return; // skip if no invites
+        return console.log('NO INVITES'); // skip if no invites
     }
     (0, node_fetch_1.default)(config.hub_api_url + '/invites/check', {
         agent: checkInvitesAgent,
@@ -92,6 +92,10 @@ const checkInviteHub = (params = {}) => __awaiter(void 0, void 0, void 0, functi
                         (0, notify_1.sendNotification)(-1, contact.alias, 'invite', owner);
                     }
                 }
+                console.log('================================EY');
+                console.log('======== PUBKEY', pubkey);
+                console.log('======== dbInvite.status', dbInvite.status);
+                console.log('======== contact', contact);
                 if (pubkey &&
                     dbInvite.status == constants_1.default.invite_statuses.complete &&
                     contact) {
