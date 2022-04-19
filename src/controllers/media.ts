@@ -431,6 +431,8 @@ export const receivePurchaseAccept = async (payload) => {
     originalMuid,
     network_type,
   } = await helpers.parseReceiveParams(payload)
+  sphinxLogger.info('=> sender id:' + sender.id, logging.Network)
+  sphinxLogger.info('=> mediaKey:' + mediaKey, logging.Network)
   if (!owner || !sender || !chat) {
     return sphinxLogger.error('=> no group chat!')
   }

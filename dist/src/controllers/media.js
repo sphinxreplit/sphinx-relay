@@ -373,6 +373,8 @@ const receivePurchaseAccept = (payload) => __awaiter(void 0, void 0, void 0, fun
     const date = new Date();
     date.setMilliseconds(0);
     const { owner, sender, chat, mediaToken, mediaKey, mediaType, originalMuid, network_type, } = yield helpers.parseReceiveParams(payload);
+    logger_1.sphinxLogger.info('=> sender id:' + sender.id, logger_1.logging.Network);
+    logger_1.sphinxLogger.info('=> mediaKey:' + mediaKey, logger_1.logging.Network);
     if (!owner || !sender || !chat) {
         return logger_1.sphinxLogger.error('=> no group chat!');
     }
