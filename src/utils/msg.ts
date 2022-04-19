@@ -90,7 +90,7 @@ function addInMediaKey(
     return full as Msg
   }
   if (!(typeof m.mediaKey === 'object')) {
-    console.log('===> 3')
+    console.log('===> 3', m.mediaKey, typeof m.mediaKey)
     return full as Msg
   }
 

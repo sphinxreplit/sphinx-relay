@@ -85,7 +85,7 @@ function addInMediaKey(full, contactId, isTribe) {
         return full;
     }
     if (!(typeof m.mediaKey === 'object')) {
-        console.log('===> 3');
+        console.log('===> 3', m.mediaKey, typeof m.mediaKey);
         return full;
     }
     if (isTribe) {
