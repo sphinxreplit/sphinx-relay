@@ -40,6 +40,9 @@ function sendMessage({ type, chat, message, sender, amount, success, failure, sk
             theSender.role = constants_1.default.chat_roles.owner;
         }
         let msg = newmsg(type, chat, theSender, message, isForwarded ? true : false);
+        if (msg.message && msg.message.mediaKey) {
+            console.log('MEDIA KEY   ++++++++', msg.message.mediaKey);
+        }
         // console.log("=> MSG TO SEND",msg)
         // console.log(type,message)
         if (!(sender && sender.publicKey)) {
@@ -146,6 +149,9 @@ function sendMessage({ type, chat, message, sender, amount, success, failure, sk
             // console.log("=> realSatsContactId", realSatsContactId, contactId)
             if (isTribeOwner && amount && realSatsContactId === contactId) {
                 mqttTopic = ''; // FORCE KEYSEND!!!
+            }
+            if (msg.message && msg.message.mediaKey) {
+                console.log('MEDIA KEY =======', msg.message.mediaKey);
             }
             const m = yield (0, msg_1.personalizeMessage)(msg, contact, isTribeOwner);
             // console.log('-> personalized msg', m)

@@ -8,6 +8,7 @@ function addInRemoteText(full: Partial<Msg>, contactId, isTribe: boolean): Msg {
   const m = full && full.message
   if (!(m && m.content)) return full as Msg
   if (!(typeof m.content === 'object')) return full as Msg
+  console.log('===> content is correctly an object!')
   if (isTribe) {
     // if just one, send it (for tribe remote_text_map... is there a better way?)
     if (m.content['chat']) {

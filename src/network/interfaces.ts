@@ -8,7 +8,8 @@ export interface MessageContent {
   id?: number
   replyUuid?: string
   mediaToken?: string
-  mediaKey?: string
+  mediaTerms?: ldat.LdatTerms
+  mediaKey?: string | { [k: string]: string }
   mediaType?: string
   date?: Date
   originalMuid?: string
@@ -17,7 +18,6 @@ export interface MessageContent {
   invoice?: string
   parentId?: number
   push?: boolean
-  mediaTerms?: ldat.LdatTerms
   skipPaymentProcessing?: boolean
   recipientAlias?: string
   recipientPic?: string

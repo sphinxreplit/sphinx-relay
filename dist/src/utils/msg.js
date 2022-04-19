@@ -19,6 +19,7 @@ function addInRemoteText(full, contactId, isTribe) {
         return full;
     if (!(typeof m.content === 'object'))
         return full;
+    console.log('===> content is correctly an object!');
     if (isTribe) {
         // if just one, send it (for tribe remote_text_map... is there a better way?)
         if (m.content['chat']) {

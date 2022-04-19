@@ -61,7 +61,9 @@ export async function sendMessage({
     theSender.role = constants.chat_roles.owner
   }
   let msg = newmsg(type, chat, theSender, message, isForwarded ? true : false)
-
+  if (msg.message && msg.message.mediaKey) {
+    console.log('MEDIA KEY   ++++++++', msg.message.mediaKey)
+  }
   // console.log("=> MSG TO SEND",msg)
 
   // console.log(type,message)
@@ -187,6 +189,9 @@ export async function sendMessage({
       mqttTopic = '' // FORCE KEYSEND!!!
     }
 
+    if (msg.message && msg.message.mediaKey) {
+      console.log('MEDIA KEY =======', msg.message.mediaKey)
+    }
     const m = await personalizeMessage(msg, contact, isTribeOwner)
     // console.log('-> personalized msg', m)
     const opts = {
