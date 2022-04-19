@@ -95,6 +95,11 @@ export async function sendMessage({
       networkType = 'mqtt' // broadcast to all
       // decrypt message.content and message.mediaKey w groupKey
       msg = await decryptMessage(msg, chat)
+      console.log('DECRYPTED MSG!!!', JSON.stringify(msg))
+      if (msg.message) {
+        console.log('======== content', msg.message.content)
+        console.log('======== mediaKey', msg.message.mediaKey)
+      }
       // console.log("SEND.TS isBotMsg")
       sphinxLogger.info(
         `[Network] => isTribeAdmin msg sending... ${msg}`,
