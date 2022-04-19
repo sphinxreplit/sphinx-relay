@@ -88,6 +88,7 @@ function addInMediaKey(full, contactId, isTribe) {
             return fillmsg(full, { mediaKey: tribeMediaKey });
         }
     }
+    console.log('===> m.mediaTerms.skipSigning', m.mediaTerms.skipSigning);
     const mediaKey = m.mediaTerms.skipSigning ? '' : m.mediaKey[contactId + ''];
     return fillmsg(full, { mediaKey });
 }

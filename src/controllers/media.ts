@@ -132,6 +132,7 @@ export const sendAttachmentMessage = async (req: Req, res) => {
     meta: { ...(amt && { amt }) },
     skipSigning: amt ? true : false, // only sign if its free
   }
+  sphinxLogger.info('=> skip signing?' + mediaTerms.skipSigning)
   const msg: { [k: string]: any } = {
     mediaTerms, // this gets converted to mediaToken
     id: message.id,

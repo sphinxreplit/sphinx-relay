@@ -121,6 +121,7 @@ const sendAttachmentMessage = (req, res) => __awaiter(void 0, void 0, void 0, fu
         meta: Object.assign({}, (amt && { amt })),
         skipSigning: amt ? true : false, // only sign if its free
     };
+    logger_1.sphinxLogger.info('=> skip signing?' + mediaTerms.skipSigning);
     const msg = {
         mediaTerms,
         id: message.id,
