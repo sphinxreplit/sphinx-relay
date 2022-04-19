@@ -431,8 +431,7 @@ export const receivePurchaseAccept = async (payload) => {
     originalMuid,
     network_type,
   } = await helpers.parseReceiveParams(payload)
-  sphinxLogger.info('=> sender id:' + sender.id, logging.Network)
-  sphinxLogger.info('=> mediaKey:' + mediaKey, logging.Network)
+
   if (!owner || !sender || !chat) {
     return sphinxLogger.error('=> no group chat!')
   }
@@ -513,7 +512,7 @@ export const receivePurchaseDeny = async (payload) => {
 }
 
 export const receiveAttachment = async (payload) => {
-  // console.log('received attachment', { payload })
+  sphinxLogger.info('=> receiveAttachment', logging.Network)
 
   const date = new Date()
   date.setMilliseconds(0)
@@ -535,6 +534,8 @@ export const receiveAttachment = async (payload) => {
     network_type,
     sender_photo_url,
   } = await helpers.parseReceiveParams(payload)
+  sphinxLogger.info('=> sender id:' + sender.id, logging.Network)
+  sphinxLogger.info('=> mediaKey:' + mediaKey, logging.Network)
   if (!owner || !sender || !chat) {
     return sphinxLogger.error('=> no group chat!')
   }
