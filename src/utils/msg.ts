@@ -79,10 +79,20 @@ function addInMediaKey(
   contactId: number,
   isTribe: boolean
 ): Msg {
+  console.log('====> addInMediaKey')
   const m = full && full.message
-  if (!(m && m.mediaKey)) return full as Msg
-  if (!(m && m.mediaTerms)) return full as Msg
-  if (!(typeof m.mediaKey === 'object')) return full as Msg
+  if (!(m && m.mediaKey)) {
+    console.log('===> 1')
+    return full as Msg
+  }
+  if (!(m && m.mediaTerms)) {
+    console.log('===> 2')
+    return full as Msg
+  }
+  if (!(typeof m.mediaKey === 'object')) {
+    console.log('===> 3')
+    return full as Msg
+  }
 
   if (isTribe) {
     if (m.mediaKey['chat']) {

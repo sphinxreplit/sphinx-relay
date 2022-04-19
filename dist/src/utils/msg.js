@@ -74,13 +74,20 @@ function encryptTribeBroadcast(full, contact, isTribeOwner) {
 }
 exports.encryptTribeBroadcast = encryptTribeBroadcast;
 function addInMediaKey(full, contactId, isTribe) {
+    console.log('====> addInMediaKey');
     const m = full && full.message;
-    if (!(m && m.mediaKey))
+    if (!(m && m.mediaKey)) {
+        console.log('===> 1');
         return full;
-    if (!(m && m.mediaTerms))
+    }
+    if (!(m && m.mediaTerms)) {
+        console.log('===> 2');
         return full;
-    if (!(typeof m.mediaKey === 'object'))
+    }
+    if (!(typeof m.mediaKey === 'object')) {
+        console.log('===> 3');
         return full;
+    }
     if (isTribe) {
         if (m.mediaKey['chat']) {
             // "chat" is the key for tribes
