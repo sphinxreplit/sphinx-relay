@@ -111,6 +111,6 @@ export const send = (body, tenant) => {
 }
 
 export const sendJson = (object, tenant: number) => {
-  sphinxLogger.warning(`Socket sendJson ${object}`)
+  sphinxLogger.info(`Socket sendJson ${object}`)
   send(JSON.stringify(object), tenant)
 }

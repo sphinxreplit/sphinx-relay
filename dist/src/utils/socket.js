@@ -113,6 +113,7 @@ const send = (body, tenant) => {
 };
 exports.send = send;
 const sendJson = (object, tenant) => {
+    logger_1.sphinxLogger.info(`Socket sendJson ${object}`);
     (0, exports.send)(JSON.stringify(object), tenant);
 };
 exports.sendJson = sendJson;
