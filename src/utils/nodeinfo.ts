@@ -96,9 +96,13 @@ export async function nodeinfo(): Promise<NodeInfoCore | NodeInfo | undefined> {
     try {
       owner = await models.Contact.findOne({ where: { id: 1 } })
     } catch (e) {
+      sphinxLogger.warning('SQLITE not open yet')
       return // just skip in SQLITE not open yet
     }
-    if (!owner) return
+    if (!owner) {
+      sphinxLogger.warning('=> no owner record')
+      return
+    }
     let lastActive = owner.lastActive
     if (!lastActive) {
       lastActive = new Date()
@@ -116,9 +120,13 @@ export async function nodeinfo(): Promise<NodeInfoCore | NodeInfo | undefined> {
       where: { isOwner: true, publicKey: owner_pubkey },
     })
   } catch (e) {
+    sphinxLogger.warning('SQLITE not open yet')
     return // just skip in SQLITE not open yet
   }
-  if (!owner) return
+  if (!owner) {
+    sphinxLogger.warning('=> no owner record')
+    return
+  }
 
   let lastActive = owner.lastActive
   if (!lastActive) {
@@ -142,7 +150,10 @@ export async function nodeinfo(): Promise<NodeInfoCore | NodeInfo | undefined> {
 
   try {
     const channelList = await Lightning.listChannels({})
-    if (!channelList) return
+    if (!channelList) {
+      sphinxLogger.warning('=> no channel list')
+      return
+    }
     const { channels } = channelList
 
     const localBalances = channels.map((c) => parseInt(c.local_balance))
@@ -152,7 +163,10 @@ export async function nodeinfo(): Promise<NodeInfoCore | NodeInfo | undefined> {
     const totalLocalBalance = localBalances.reduce((a, b) => a + b, 0)
 
     const pendingChannels = await Lightning.pendingChannels()
-    if (!info) return
+    if (!info) {
+      sphinxLogger.warning('=> failed to getInfo from lightning node')
+      return
+    }
     const node: NodeInfo = {
       node_alias: process.env.NODE_ALIAS || '',
       ip: process.env.NODE_IP || '',

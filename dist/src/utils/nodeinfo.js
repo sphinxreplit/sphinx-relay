@@ -66,10 +66,13 @@ function nodeinfo() {
                 owner = yield models_1.models.Contact.findOne({ where: { id: 1 } });
             }
             catch (e) {
+                logger_1.sphinxLogger.warning('SQLITE not open yet');
                 return; // just skip in SQLITE not open yet
             }
-            if (!owner)
+            if (!owner) {
+                logger_1.sphinxLogger.warning('=> no owner record');
                 return;
+            }
             let lastActive = owner.lastActive;
             if (!lastActive) {
                 lastActive = new Date();
@@ -87,10 +90,13 @@ function nodeinfo() {
             });
         }
         catch (e) {
+            logger_1.sphinxLogger.warning('SQLITE not open yet');
             return; // just skip in SQLITE not open yet
         }
-        if (!owner)
+        if (!owner) {
+            logger_1.sphinxLogger.warning('=> no owner record');
             return;
+        }
         let lastActive = owner.lastActive;
         if (!lastActive) {
             lastActive = new Date();
@@ -108,8 +114,10 @@ function nodeinfo() {
         const latest_message = yield latestMessage();
         try {
             const channelList = yield Lightning.listChannels({});
-            if (!channelList)
+            if (!channelList) {
+                logger_1.sphinxLogger.warning('=> no channel list');
                 return;
+            }
             const { channels } = channelList;
             const localBalances = channels.map((c) => parseInt(c.local_balance));
             const remoteBalances = channels.map((c) => parseInt(c.remote_balance));
@@ -117,8 +125,10 @@ function nodeinfo() {
             const largestRemoteBalance = Math.max(...remoteBalances);
             const totalLocalBalance = localBalances.reduce((a, b) => a + b, 0);
             const pendingChannels = yield Lightning.pendingChannels();
-            if (!info)
+            if (!info) {
+                logger_1.sphinxLogger.warning('=> failed to getInfo from lightning node');
                 return;
+            }
             const node = {
                 node_alias: process.env.NODE_ALIAS || '',
                 ip: process.env.NODE_IP || '',
