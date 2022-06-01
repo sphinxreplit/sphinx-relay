@@ -243,10 +243,12 @@ function updateGitBotPat(tenant, pat) {
 exports.updateGitBotPat = updateGitBotPat;
 function getOrCreateGitBot(tenant) {
     return __awaiter(this, void 0, void 0, function* () {
+        logger_1.sphinxLogger.info('getOrCreateGitBot' + tenant);
         const existing = yield models_1.models.Bot.findOne({
             where: { uuid: exports.GITBOT_UUID, tenant },
         });
         if (existing) {
+            logger_1.sphinxLogger.info('bot exists' + JSON.stringify(existing));
             return existing;
         }
         const newBot = {
@@ -257,6 +259,7 @@ function getOrCreateGitBot(tenant) {
             pricePerUse: 0,
             tenant,
         };
+        logger_1.sphinxLogger.info('create new bot' + JSON.stringify(newBot));
         const b = yield models_1.models.Bot.create(newBot);
         return b;
     });

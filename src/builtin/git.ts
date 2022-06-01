@@ -251,10 +251,12 @@ export async function updateGitBotPat(
 }
 
 export async function getOrCreateGitBot(tenant: number): Promise<BotRecord> {
+  sphinxLogger.info('getOrCreateGitBot' + tenant)
   const existing = await models.Bot.findOne({
     where: { uuid: GITBOT_UUID, tenant },
   })
   if (existing) {
+    sphinxLogger.info('bot exists' + JSON.stringify(existing))
     return existing
   }
   const newBot = {
@@ -265,6 +267,7 @@ export async function getOrCreateGitBot(tenant: number): Promise<BotRecord> {
     pricePerUse: 0,
     tenant,
   }
+  sphinxLogger.info('create new bot' + JSON.stringify(newBot))
   const b = await models.Bot.create(newBot)
   return b
 }
