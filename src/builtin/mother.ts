@@ -83,6 +83,7 @@ export function init() {
             await getOrCreateGitBot(chat.tenant)
             chatBot.botUuid = GITBOT_UUID
           }
+          sphinxLogger.info('create ChatBot' + JSON.stringify(chatBot))
           await models.ChatBot.create(chatBot)
           const theName = builtInBotNames[botName] || 'Bot'
           const embed = new Sphinx.MessageEmbed()
