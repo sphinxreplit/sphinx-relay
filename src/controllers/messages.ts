@@ -451,6 +451,7 @@ export const receiveMessage = async (payload: Payload): Promise<void> => {
   }
   const isTribe = chat_type === constants.chat_types.tribe
   if (isTribe) {
+    console.log('======> recieveMsg photo url', sender_photo_url)
     msg.senderAlias = sender_alias
     msg.senderPic = sender_photo_url
     if (remote_content) msg.remoteMessageContent = remote_content

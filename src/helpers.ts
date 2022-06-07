@@ -273,7 +273,7 @@ export async function parseReceiveParams(payload: Payload): Promise<{
   const dest = dat.dest
   const recipient_alias = dat.message.recipientAlias
   const recipient_pic = dat.message.recipientPic
-
+  console.log('========> parseReceiveParams photo', sender_photo_url)
   const isConversation =
     !chat_type || (chat_type && chat_type == constants.chat_types.conversation)
   let sender: ContactRecord

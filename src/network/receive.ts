@@ -371,6 +371,10 @@ async function forwardMessageToTribe(
 
   const type = payload.type
   const message = payload.message
+  console.log(
+    '=========> sendMessage image',
+    (payload.sender && payload.sender.photo_url) || ''
+  )
   sendMessage({
     type,
     message,

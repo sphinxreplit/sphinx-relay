@@ -353,6 +353,7 @@ function forwardMessageToTribe(ogpayload, sender, realSatsContactId, amtToForwar
         }
         const type = payload.type;
         const message = payload.message;
+        console.log('=========> sendMessage image', (payload.sender && payload.sender.photo_url) || '');
         (0, send_1.sendMessage)({
             type,
             message,

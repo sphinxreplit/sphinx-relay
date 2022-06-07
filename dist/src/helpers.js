@@ -233,6 +233,7 @@ function parseReceiveParams(payload) {
         const dest = dat.dest;
         const recipient_alias = dat.message.recipientAlias;
         const recipient_pic = dat.message.recipientPic;
+        console.log('========> parseReceiveParams photo', sender_photo_url);
         const isConversation = !chat_type || (chat_type && chat_type == constants_1.default.chat_types.conversation);
         let sender;
         let chat;

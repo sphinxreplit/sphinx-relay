@@ -302,6 +302,7 @@ export function newmsg(
   if (!includeStatus && message.status) {
     delete message.status
   }
+  console.log('=======> newmsg photo', photoUrlToInclude)
   return {
     type: type,
     chat: {

@@ -382,6 +382,7 @@ const receiveMessage = (payload) => __awaiter(void 0, void 0, void 0, function* 
     };
     const isTribe = chat_type === constants_1.default.chat_types.tribe;
     if (isTribe) {
+        console.log('======> recieveMsg photo url', sender_photo_url);
         msg.senderAlias = sender_alias;
         msg.senderPic = sender_photo_url;
         if (remote_content)
