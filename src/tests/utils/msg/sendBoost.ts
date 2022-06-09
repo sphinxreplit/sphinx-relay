@@ -62,7 +62,7 @@ export async function sendBoost(t, node1, node2, replyMessage, amount, tribe) {
     'booster should have lost amount'
   )
   t.true(
-    Math.abs(boosteeBalAfter - boosteeBalBefore - (amount - 10)) <= config.allowedFee,
+    Math.abs(boosteeBalAfter - boosteeBalBefore - amount) <= config.allowedFee,
     'boostee should have gained amount'
   )
 
