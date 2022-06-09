@@ -33,7 +33,7 @@ async function setVersion() {
   try {
     await sequelize.query(`PRAGMA user_version = ${USER_VERSION}`)
   } catch (e) {
-    sphinxLogger.error('setVersion failed', logging.DB)
+    sphinxLogger.error(`setVersion failed ${e}`, logging.DB)
   }
 }
 

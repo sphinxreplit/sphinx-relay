@@ -46,7 +46,7 @@ function setVersion() {
             yield models_1.sequelize.query(`PRAGMA user_version = ${USER_VERSION}`);
         }
         catch (e) {
-            logger_1.sphinxLogger.error('setVersion failed', logger_1.logging.DB);
+            logger_1.sphinxLogger.error(`setVersion failed ${e}`, logger_1.logging.DB);
         }
     });
 }

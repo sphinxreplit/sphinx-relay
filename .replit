@@ -1,0 +1,3 @@
+[packager]
+language = "nodejs"
+run = "npm install && npm run build && node ./dist/app.js --config=./config/app.json"
