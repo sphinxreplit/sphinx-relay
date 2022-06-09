@@ -50,7 +50,7 @@ function sendBoost(t, node1, node2, replyMessage, amount, tribe) {
         const [boosterBalAfter, boosteeBalAfter] = yield boostBalances(t, node1, node2);
         // check that node1 sent payment and node2 received payment based on balances
         t.true(Math.abs(boosterBalBefore - boosterBalAfter - amount) <= config_1.config.allowedFee, 'booster should have lost amount');
-        t.true(Math.abs(boosteeBalAfter - boosteeBalBefore - (amount - 10)) <= config_1.config.allowedFee, 'boostee should have gained amount');
+        t.true(Math.abs(boosteeBalAfter - boosteeBalBefore - amount) <= config_1.config.allowedFee, 'boostee should\'ve gained amount');
         return { success: true, message: msg.response };
     });
 }
