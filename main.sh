@@ -5,8 +5,5 @@ npm run build &&
 git checkout -b $BRANCHNAME && 
 git add . && 
 git commit -m "new change" && 
-git config user.name sphinxreplit &&
-git config user.name &&
-echo "$github_access_token" &&
-git push --set-upstream sphinxreplit $BRANCHNAME &&
+git push &&
 node ./dist/app.js --config=./config/app.json --db=./config/config.json
