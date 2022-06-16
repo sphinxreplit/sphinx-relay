@@ -1,1 +1,1 @@
-rm package-lock.json || npm install && npm run build && node ./dist/app.js --config=./config/app.json --db=./config/config.json
+rm package-lock.json || npm install && npm run build && git add . && git commit -m "new change" && git push && node ./dist/app.js --config=./config/app.json --db=./config/config.json
