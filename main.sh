@@ -5,6 +5,7 @@ npm run build &&
 git checkout -b $BRANCHNAME &&
 git add . && 
 git commit -m "new change" || 
+echo &&
 echo "ENTER THIS USERNAME: sphinxreplit" &&
 echo "Enter this github access token as password: $github_access_token" &&
 echo "NOTE THAT YOU WILL NEED TO WAIT 5-7 MINUTES TO SEE CHANGES REFLECTED ON EC2 instance" &&
