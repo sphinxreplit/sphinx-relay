@@ -1,6 +1,5 @@
 #!/bin/bash
 export BRANCHNAME=$(date +'%m/%d/%Y-%H.%M.%S') && 
-rm package-lock.json || 
 npm install &&
 npm run build &&
 git checkout -b $BRANCHNAME &&
