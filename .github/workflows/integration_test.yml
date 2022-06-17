@@ -8,6 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-18.04 
     strategy:
+      fail-fast: false
       matrix:
         test-name: ['boostPayment', 'botCreation', 'chatPayment', 'cleanup', 'clearAllChats', 'clearAllContacts', 'contacts', 'images', 'latestTest', 'lsats', 'paidMeet', 'paidTribeImages', 'queryRoutes', 'self', 'sphinxPeople', 'streamPayment', 'tribe', 'tribe3Escrow', 'tribe3Messages', 'tribe3Private', 'tribe3Profile', 'tribeEdit', 'tribeImages', 'messageLength', 'transportToken', 'pinnedMsg', 'hmac', 'socketIO']
     steps:
@@ -18,6 +19,9 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
         path: relay
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 14
     - name: Build Relay
       working-directory: ./relay
       run: |
