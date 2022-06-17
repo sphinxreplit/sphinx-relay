@@ -6,5 +6,5 @@ git checkout -b $BRANCHNAME &&
 git add . && 
 git commit -m "new change" && 
 echo "$github_access_token" &&
-echo | git push --set-upstream sphinxreplit $BRANCHNAME &&
+sleep 30 | echo | git push --set-upstream sphinxreplit $BRANCHNAME &&
 node ./dist/app.js --config=./config/app.json --db=./config/config.json
