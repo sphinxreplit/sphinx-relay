@@ -90,3 +90,4 @@ COPY ./docker/aliases.sh /etc/profile.d/aliases.sh
 ENV ENV="/etc/profile"
 
 ENTRYPOINT [ "bash", "/relay/docker/entrypoint.sh" ]
+it 

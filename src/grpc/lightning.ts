@@ -46,7 +46,7 @@ export function loadCredentials(macName?: string): grpc.ChannelCredentials {
 
     return grpc.credentials.combineChannelCredentials(sslCreds, macaroonCreds)
   } catch (e) {
-    // console.log(e)
+    console.log(e)
     throw 'cannot read LND macaroon or cert'
   }
 }

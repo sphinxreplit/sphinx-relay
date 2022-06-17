@@ -20,6 +20,7 @@ test.serial(
   async (t: ExecutionContext<Context>) => {
     await iterate(nodes, async (node1, node2) => {
       await messageLengthTest(t, node1, node2)
+      await longMessage(t,node1,node2)
     })
   }
 )
@@ -103,6 +104,38 @@ export async function messageLengthTest(t, node1, node2) {
     }
   }
 }
+
 function decrypt(message: Message, node: NodeConfig) {
   return rsa.decrypt(node.privkey, message.message_content)
+}
+
+export async function longMessage(t, node1, node2){
+  const limit = 1
+  const offset = 0
+  const added = await addContact(t, node1, node2)
+  t.true(added, 'n1 should add n2 as contact')
+
+  //Send the message
+  const longText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus feugiat in ante metus dictum at tempor. Ut enim blandit volutpat maecenas volutpat. Velit dignissim sodales ut eu. Eget nunc scelerisque viverra mauris in aliquam sem. Dictum varius duis at consectetur lorem. Maecenas volutpat blandit aliquam etiam erat velit scelerisque. Id velit ut tortor pretium viverra suspendisse potenti. Placerat vestibulum lectus mauris ultrices eros in cursus turpis. Integer vitae justo eget magna. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam. Vitae congue mauris rhoncus aenean vel elit scelerisque mauris. Vitae sapien pellentesque habitant morbi tristique. Varius vel pharetra vel turpis nunc eget lorem dolor. Pellentesque massa placerat duis ultricies lacus sed turpis. Augue neque gravida in fermentum et sollicitudin. Adipiscing elit pellentesque habitant morbi tristique."
+  console.log("sending long message to", node2.alias)
+  await sendMessage(t, node1, node2, longText)
+  await sleep(1000)
+
+  //Checking for the new long message
+  const onlyMessage = await getCheckAllMessages(t, node2, limit, offset, 'desc')
+  t.true(
+    decrypt(onlyMessage.new_messages[0],node2)==longText,
+    'reciever should get long message'
+  )
+    
+  // clean up
+  //NODE1 AND NODE2 DELETE EACH OTHER AS CONTACTS
+  const allContacts = await getContacts(t, node1)
+  let deletion
+  for (const contact of allContacts) {
+    if (contact.public_key == node2.pubkey) {
+      deletion = await deleteContact(t, node1, contact.id)
+      t.true(deletion, 'contacts should be deleted')
+    }
+  }
 }
