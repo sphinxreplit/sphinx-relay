@@ -72,7 +72,8 @@ export async function boostPayment(t, index1, index2, index3) {
   t.truthy(tribeMessage3, 'node3 should send message to tribe')
 
   //NODE1 SENDS A BOOST ON NODE2'S MESSAGE
-  const boost = await sendBoost(t, node1, node2, tribeMessage2, 11, tribe)
+  //I'm having an issue here pls help!!!!
+  const boost = await sendBoost(t, node1, node1, tribeMessage2, 11, tribe)
   t.true(boost.success)
 
   //NODE2 SENDS A BOOST ON NODE3'S MESSAGE

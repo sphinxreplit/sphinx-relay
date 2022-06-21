@@ -56,7 +56,8 @@ function boostPayment(t, index1, index2, index3) {
         let tribeMessage3 = yield (0, msg_1.sendTribeMessageAndCheckDecryption)(t, node3, node1, text3, tribe);
         t.truthy(tribeMessage3, 'node3 should send message to tribe');
         //NODE1 SENDS A BOOST ON NODE2'S MESSAGE
-        const boost = yield (0, msg_1.sendBoost)(t, node1, node2, tribeMessage2, 11, tribe);
+        //I'm having an issue here pls help!!!!
+        const boost = yield (0, msg_1.sendBoost)(t, node1, node1, tribeMessage2, 11, tribe);
         t.true(boost.success);
         //NODE2 SENDS A BOOST ON NODE3'S MESSAGE
         const boost2 = yield (0, msg_1.sendBoost)(t, node2, node3, tribeMessage3, 12, tribe);
