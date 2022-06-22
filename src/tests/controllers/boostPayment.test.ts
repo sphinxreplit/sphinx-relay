@@ -73,6 +73,7 @@ export async function boostPayment(t, index1, index2, index3) {
 
   //NODE1 SENDS A BOOST ON NODE2'S MESSAGE
   //I'm having an issue here pls help!!!!
+  //Nice jobs 
   const boost = await sendBoost(t, node1, node2, tribeMessage2, 11, tribe)
   t.true(boost.success)
 
