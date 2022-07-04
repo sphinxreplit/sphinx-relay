@@ -71,6 +71,7 @@ function tribeUniqueAliasTest(t, node1, node2) {
         let text = (0, helpers_1.randomText)();
         let tribeMessage = yield (0, msg_1.sendTribeMessageAndCheckDecryption)(t, node1, node2, text, tribe);
         t.true(!!tribeMessage, 'node1 should send message to tribe');
+        console.log(tribeMessage);
         t.true(tribeMessage.sender_alias !== tribeMessage.recipient_alias, 'The recipient alias should be different from the sender alias');
         //Check that our logic for assigning an alternate alias is working
         t.true(tribeMessage.sender_alias === `${node1.alias}_2`);

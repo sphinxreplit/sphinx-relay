@@ -85,7 +85,7 @@ async function tribeUniqueAliasTest(
   node2.alias = node1.alias;
   //Check that both nodes have the same alias
   t.true(node1.alias === node2.alias)
-
+  
   //NODE2 JOINS TRIBE CREATED BY NODE1
   if (node1.routeHint) tribe.owner_route_hint = node1.routeHint
   let join = await joinTribe(t, node2, tribe)
@@ -100,6 +100,7 @@ async function tribeUniqueAliasTest(
       tribe
   )
   t.true(!!tribeMessage, 'node1 should send message to tribe')
+  console.log(tribeMessage)
   t.true(tribeMessage.sender_alias!==tribeMessage.recipient_alias,'The recipient alias should be different from the sender alias')
   //Check that our logic for assigning an alternate alias is working
   t.true(tribeMessage.sender_alias === `${node1.alias}_2`)
