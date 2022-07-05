@@ -15,6 +15,10 @@ const del_1 = require("../utils/del");
 const save_1 = require("../utils/save");
 const helpers_1 = require("../utils/helpers");
 const msg_1 = require("../utils/msg");
+const mqtt = require("mqtt");
+const tribes_1 = require("../../utils/tribes");
+const config_1 = require("../../utils/config");
+const config = (0, config_1.loadConfig)();
 ava_1.default.serial('tribe', (t) => __awaiter(void 0, void 0, void 0, function* () {
     t.true(Array.isArray(nodes_1.default));
     yield (0, helpers_1.iterate)(nodes_1.default, (node1, node2) => __awaiter(void 0, void 0, void 0, function* () {
@@ -63,25 +67,33 @@ function tribeUniqueAliasTest(t, node1, node2) {
         node2.alias = node1.alias;
         //Check that both nodes have the same alias
         t.true(node1.alias === node2.alias);
+        console.log(node1.alias, node2.alias);
         //NODE2 JOINS TRIBE CREATED BY NODE1
         if (node1.routeHint)
             tribe.owner_route_hint = node1.routeHint;
         let join = yield (0, save_1.joinTribe)(t, node2, tribe);
         t.true(join, 'node2 should join tribe');
+        const url = mqttURL(tribe.host);
+        const messages = [];
+        const pwd = yield (0, tribes_1.genSignedTimestamp)(node2.pubkey);
+        /*
+        Not sure if this is the correct way or not
+         */
+        const cl = mqtt.connect(url, {
+            username: node2.pubkey,
+            password: pwd,
+            reconnectPeriod: 0
+        });
+        cl.on('message', function (topic, message) {
+            const temp = (JSON.parse(message.toString()));
+            messages.push(temp);
+        });
         let text = (0, helpers_1.randomText)();
         let tribeMessage = yield (0, msg_1.sendTribeMessageAndCheckDecryption)(t, node1, node2, text, tribe);
         t.true(!!tribeMessage, 'node1 should send message to tribe');
-        console.log(tribeMessage);
-        t.true(tribeMessage.sender_alias !== tribeMessage.recipient_alias, 'The recipient alias should be different from the sender alias');
+        t.true(messages[0].sender_alias !== messages[0].recipient_alias, 'The recipient alias should be different from the sender alias');
         //Check that our logic for assigning an alternate alias is working
-        t.true(tribeMessage.sender_alias === `${node1.alias}_2`);
-        //NODE2 SENDS A TEXT MESSAGE IN TRIBE
-        const text2 = (0, helpers_1.randomText)();
-        let tribeMessage2 = yield (0, msg_1.sendTribeMessageAndCheckDecryption)(t, node2, node1, text2, tribe);
-        t.true(!!tribeMessage2, 'node2 should send message to tribe');
-        t.true(tribeMessage.sender_alias !== tribeMessage.recipient_alias, 'The recipient alias should be different from the sender alias');
-        //Check that our logic for assigning an alternate alias is working
-        t.true(tribeMessage.sender_alias === `${node2.alias}_2`);
+        t.true(messages[0].sender_alias === `${node1.alias}_2`);
         //NODE2 LEAVES THE TRIBE
         let left = yield (0, del_1.leaveTribe)(t, node2, tribe);
         t.true(left, 'node2 should leave tribe');
@@ -89,5 +101,22 @@ function tribeUniqueAliasTest(t, node1, node2) {
         let delTribe = yield (0, del_1.deleteTribe)(t, node1, tribe);
         t.true(delTribe, 'node1 should delete tribe');
     });
+}
+function mqttURL(h) {
+    //Not sure what the configs should be since I don't have the env files
+    let host = config.mqtt_host || h;
+    let protocol = 'tls';
+    if (config.tribes_insecure) {
+        protocol = 'tcp';
+    }
+    let port = 8883;
+    if (config.tribes_mqtt_port) {
+        port = config.tribes_mqtt_port;
+    }
+    if (host.includes(':')) {
+        const arr = host.split(':');
+        host = arr[0];
+    }
+    return `${protocol}://${host}:${port}`;
 }
 //# sourceMappingURL=tribe.test.js.map
